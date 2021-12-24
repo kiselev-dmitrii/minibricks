@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GameAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: bada6c38147ae4093865c0b062767c67, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 63f845110e5444ef39590ce721f19ceb, type: 3}
+  - {fileID: 21300000, guid: 9f3fa151bbc4046bf9c7fd045893e289, type: 3}
+  - {fileID: 21300000, guid: ebd15443abf7f41c5ab35674558747b3, type: 3}
+  - {fileID: 21300000, guid: 015f58b569f9943009604bdc471f2ac7, type: 3}
+  - {fileID: 21300000, guid: 794fe7a8b444c4d0983e32c0d139886a, type: 3}
+  - {fileID: 21300000, guid: ffc4f48967e5649a7aca3e468b18e789, type: 3}
+  - {fileID: 21300000, guid: b1616f8ab0d8c41ce835eb258804495c, type: 3}
+  - {fileID: 21300000, guid: 939c8e2d86cf54884a8721b7c682d7d8, type: 3}
+  - {fileID: 21300000, guid: 0746218fdf1cc4b38a3f1efc969043a5, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Platform
+  - BlockZ
+  - BlockL
+  - Cloud1
+  - BlockT
+  - BlockI
+  - Sky
+  - Cloud2
+  - BlockBox
+  m_RenderDataMap: {}
+  m_Tag: GameAtlas
+  m_IsVariant: 0
