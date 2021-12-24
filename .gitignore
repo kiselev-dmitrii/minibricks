@@ -1,0 +1,8 @@
+/.vs
+/.idea
+/Library
+/obj
+/Temp
+/Logs
+/UserSettings
+/Build/*
