@@ -1,0 +1,11 @@
+{
+    "name": "com.artofbytes.ndata",
+    "version": "1.0.3",
+    "displayName": "NData",
+    "description": "MVVM framework",
+    "unity": "2018.4",
+    "author": {
+        "name": "ArtOfBytes",
+        "url": "http://tools.artofbytes.com/"
+    }
+}
