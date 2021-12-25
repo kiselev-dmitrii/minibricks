@@ -7,6 +7,8 @@ namespace MiniBricks {
         [SerializeField]
         private float moveStep;
         [SerializeField]
+        private float fallSpeed;
+        [SerializeField]
         private float spawnHeight;
         [SerializeField]
         private Tower tower;
@@ -31,6 +33,7 @@ namespace MiniBricks {
         
         
         public float MoveStep => moveStep;
+        public float FallSpeed => fallSpeed;
         public float SpawnHeight => spawnHeight;
 
         public void Start() {

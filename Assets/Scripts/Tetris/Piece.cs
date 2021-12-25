@@ -4,6 +4,7 @@ using UnityEngine;
 namespace MiniBricks.Tetris {
     public interface IPieceDef {
         float MoveStep { get; }
+        float FallSpeed { get; }
     }
     
     public class Piece : MonoBehaviour {
@@ -16,7 +17,7 @@ namespace MiniBricks.Tetris {
 
         public void Initialize(IPieceDef pieceDef) {
             this.pieceDef = pieceDef;
-            rb.velocity = Vector2.down;
+            rb.velocity = Vector2.down * pieceDef.FallSpeed;
         }
 
         public void Move(int direction) {
