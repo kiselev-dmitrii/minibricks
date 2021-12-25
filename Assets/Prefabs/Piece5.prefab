@@ -55,13 +55,13 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404859634338989823}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 1
+  m_AngularDrag: 2
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -93,14 +93,20 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.5, y: 1}
+    - - {x: 1.46, y: 1}
+      - {x: -0.46, y: 1}
+      - {x: -0.5, y: 0.96}
       - {x: -0.5, y: 0}
-      - {x: -1.5000001, y: 0}
-      - {x: -1.5000001, y: -1}
-      - {x: 0.5, y: -1}
+      - {x: -1.46, y: 0}
+      - {x: -1.5, y: -0.04}
+      - {x: -1.5000001, y: -0.96}
+      - {x: -1.46, y: -1}
+      - {x: 0.46, y: -1}
+      - {x: 0.5, y: -0.96}
       - {x: 0.5, y: 0}
-      - {x: 1.5000001, y: 0}
-      - {x: 1.5000001, y: 1}
+      - {x: 1.46, y: 0}
+      - {x: 1.5, y: 0.04}
+      - {x: 1.5, y: 0.96}
 --- !u!212 &404859634338989817
 SpriteRenderer:
   m_ObjectHideFlags: 0

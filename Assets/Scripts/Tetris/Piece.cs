@@ -17,6 +17,7 @@ namespace MiniBricks.Tetris {
 
         public void Initialize(IPieceDef pieceDef) {
             this.pieceDef = pieceDef;
+            rb.isKinematic = true;
             rb.velocity = Vector2.down * pieceDef.FallSpeed;
         }
 
