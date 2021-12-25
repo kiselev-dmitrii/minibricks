@@ -7,3 +7,5 @@
 /UserSettings
 /Build/*
 .DS_Store
+*.csproj
+*.sln
