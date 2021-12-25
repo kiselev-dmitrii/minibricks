@@ -60,14 +60,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0746218fdf1cc4b38a3f1efc969043a5, type: 3}
   m_PackedSpriteNamesToIndex:
   - Platform
-  - BlockZ
-  - BlockL
+  - Piece5
+  - Piece2
   - Cloud1
-  - BlockT
-  - BlockI
+  - Piece3
+  - Piece1
   - Sky
   - Cloud2
-  - BlockBox
+  - Piece4
   m_RenderDataMap: {}
   m_Tag: GameAtlas
   m_IsVariant: 0
