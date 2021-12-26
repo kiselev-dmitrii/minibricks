@@ -1,6 +1,5 @@
 using MiniBricks.Tetris;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace MiniBricks {
     public class TestApplication : MonoBehaviour, IPieceDef, ITowerDef {
@@ -22,9 +21,7 @@ namespace MiniBricks {
                 this.application = application;
             }
             
-            public Piece Create(Vector2 position) {
-                var i = Random.Range(0, application.piecePrefabs.Length);
-                var prefab = application.piecePrefabs[i];
+            public Piece Create(Piece prefab, Vector2 position) {
                 var result = Instantiate(prefab, position, Quaternion.identity, application.transform);
                 result.Initialize(application);
                 return result;
@@ -35,6 +32,7 @@ namespace MiniBricks {
         public float MoveStep => moveStep;
         public float FallSpeed => fallSpeed;
         public float SpawnHeight => spawnHeight;
+        public Piece[] PiecePrefabs => piecePrefabs;
 
         public void Start() {
             var pieceFactory = new PieceFactory(this);

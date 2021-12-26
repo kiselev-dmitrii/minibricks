@@ -11,10 +11,14 @@ namespace MiniBricks.Tetris {
         /// The distance between the top of the tower and the place where a piece spawns
         /// </summary>
         float SpawnHeight { get; }
+        /// <summary>
+        /// Templates of pieces
+        /// </summary>
+        Piece[] PiecePrefabs { get; }
     }
 
     public interface IPieceFactory {
-        Piece Create(Vector2 position);
+        Piece Create(Piece prefab, Vector2 position);
     }
     
     public class Tower : MonoBehaviour {
@@ -72,7 +76,11 @@ namespace MiniBricks.Tetris {
 
         private void SpawnPiece() {
             var piecePosition = CalculateSpawnPoint();
-            currentPiece = pieceFactory.Create(piecePosition);
+
+            int i = Random.Range(0, def.PiecePrefabs.Length);
+            var prefab = def.PiecePrefabs[i];
+            
+            currentPiece = pieceFactory.Create(prefab, piecePosition);
             currentPiece.Touched += OnCurrentPieceTouched;
         }
         

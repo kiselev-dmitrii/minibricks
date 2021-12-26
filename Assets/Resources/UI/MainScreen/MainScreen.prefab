@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 688230184574406114}
   - component: {fileID: 1360579698895144841}
   - component: {fileID: 7494363204297240095}
+  - component: {fileID: 8980682597305059347}
   m_Layer: 0
   m_Name: StartBattleButton
   m_TagString: Untagged
@@ -92,6 +93,19 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 10, y: -10}
   m_UseGraphicAlpha: 1
+--- !u!114 &8980682597305059347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463977919066692643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c6526c9d4c10c45b8975cbdcf8975f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: OnStartBattleButtonClick
 --- !u!1 &1756654633146768445
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +266,7 @@ GameObject:
   - component: {fileID: 8404537653596938488}
   - component: {fileID: 1286959776217495869}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Cloud1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,7 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -741,7 +755,7 @@ GameObject:
   - component: {fileID: 4260544452231675686}
   - component: {fileID: 7927253819454457865}
   m_Layer: 0
-  m_Name: Image.1
+  m_Name: Cloud2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -788,7 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -816,6 +830,7 @@ GameObject:
   - component: {fileID: 8980682597719571780}
   - component: {fileID: 8980682597719571781}
   - component: {fileID: 8559242705278510249}
+  - component: {fileID: 8980682597305059345}
   m_Layer: 0
   m_Name: StartTrainingButton
   m_TagString: Untagged
@@ -896,6 +911,19 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 10, y: -10}
   m_UseGraphicAlpha: 1
+--- !u!114 &8980682597305059345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8980682597719571784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c6526c9d4c10c45b8975cbdcf8975f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: OnStartTrainingButtonClick
 --- !u!1 &8980682597954675749
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,6 +936,7 @@ GameObject:
   - component: {fileID: 8980682597954675745}
   - component: {fileID: 8980682597954675746}
   - component: {fileID: 8980682597954675747}
+  - component: {fileID: 796421163}
   m_Layer: 0
   m_Name: MainScreen
   m_TagString: Untagged
@@ -999,3 +1028,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &796421163
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8980682597954675749}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
