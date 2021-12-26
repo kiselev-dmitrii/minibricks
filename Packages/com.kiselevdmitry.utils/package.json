@@ -1,0 +1,11 @@
+{
+    "name": "com.kiselevdmitry.utils",
+    "version": "0.0.1",
+    "displayName": "Common Utils",
+    "description": "Common Utils",
+    "unity": "2018.4",
+    "author": {
+        "name": "Dmitry Kiselev",
+        "url": "http://kiselevdmitry.com/"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "com.kiselevdmitry.ndata.bindings",
+    "version": "1.0.3",
+    "displayName": "NData Bindings",
+    "description": "Bindings for NData MVVM framework",
+    "unity": "2018.4",
+    "author": {
+        "name": "Dmitry Kiselev",
+        "url": "http://kiselevdmitry.com/"
+    }
+}
