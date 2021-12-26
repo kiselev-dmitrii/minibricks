@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace MiniBricks.Commands {
+namespace MiniBricks.Game.Commands {
     public class KeyboardCommandProvider : MonoBehaviour, ICommandProvider {
         public event Action<CommandType> CommandEmitted;
 

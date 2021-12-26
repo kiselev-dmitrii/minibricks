@@ -1,7 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using KiselevDmitry.Utils;
-using MiniBricks.Utils;
 
 namespace MiniBricks.Controllers {
     public enum GameState {
@@ -44,37 +42,6 @@ namespace MiniBricks.Controllers {
 
             GameState = GameState.Menu;
             GameStateChanged?.Invoke();
-        }
-    }
-    
-    public class GameContext : IDisposable {
-        private readonly Disposer disposer;
-        private Action onDispose;
-        
-        public GameContext() {
-            disposer = new Disposer();
-        }
-
-        public void RegisterDisposable(IDisposable disposable) {
-            disposer.Add(disposable);
-        }
-
-        public void RegisterDisposable(Action callback) {
-            onDispose += callback;
-        }
-        
-        public void Dispose() {
-            onDispose?.Invoke();
-            disposer.Dispose();
-        }
-    }
-
-    public class GameContextFactory {
-        public GameContext Create() {
-            var gameContext = new GameContext();
-            
-            
-            return gameContext;
         }
     }
 }

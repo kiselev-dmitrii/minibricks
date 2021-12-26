@@ -1,29 +1,30 @@
 using System;
 using UnityEngine;
 
-namespace MiniBricks.Tetris {
-    public interface IPieceDef {
-        float MoveStep { get; }
-        float FallSpeed { get; }
+namespace MiniBricks.Game {
+    [Serializable]
+    public class PieceDef {
+        public float MoveStep;
+        public float FallSpeed;
     }
     
     public class Piece : MonoBehaviour {
         [SerializeField]
         private Rigidbody2D rb;
 
-        private IPieceDef pieceDef;
-        
+        private PieceDef def;
+
         public event Action<Piece, Collision2D> Touched;
 
-        public void Initialize(IPieceDef pieceDef) {
-            this.pieceDef = pieceDef;
+        public void Initialize(PieceDef def) {
+            this.def = def;
             rb.isKinematic = true;
-            rb.velocity = Vector2.down * pieceDef.FallSpeed;
+            rb.velocity = Vector2.down * def.FallSpeed;
         }
 
         public void Move(int direction) {
             float sign = Mathf.Sign(direction);
-            rb.position += sign * Vector2.right * pieceDef.MoveStep;
+            rb.position += sign * Vector2.right * def.MoveStep;
         }
         
         public void Rotate() {

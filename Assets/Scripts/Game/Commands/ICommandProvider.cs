@@ -1,6 +1,6 @@
 using System;
 
-namespace MiniBricks.Commands {
+namespace MiniBricks.Game.Commands {
     public enum CommandType {
         Left,
         Right,
