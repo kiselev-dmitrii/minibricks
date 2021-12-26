@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6417856810676443091}
+  polygonCollider: {fileID: 6417856810676443090}
 --- !u!212 &6417856810676443089
 SpriteRenderer:
   m_ObjectHideFlags: 0

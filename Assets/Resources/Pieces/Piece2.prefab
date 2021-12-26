@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6159540945160510702}
+  polygonCollider: {fileID: 2747701928758197782}
 --- !u!60 &2747701928758197782
 PolygonCollider2D:
   m_ObjectHideFlags: 0

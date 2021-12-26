@@ -10,17 +10,20 @@ namespace MiniBricks.Controllers {
     }
     
     public class LobbyController {
-        private readonly GameContextFactory gameContextFactory;
+        private GameContextFactory gameContextFactory;
         private GameContext gameContext;
         
-        public LobbyController(GameContextFactory gameContextFactory) {
-            this.gameContextFactory = gameContextFactory;
+        public LobbyController() {
             GameState = GameState.Menu;
         }
         
         public GameState GameState { get; private set; }
         public event Action GameStateChanged;
 
+        public void SetGameContextFactory(GameContextFactory value) {
+            gameContextFactory = value;
+        }
+        
         public async Task StartGame() {
             GameState = GameState.Starting;
             GameStateChanged?.Invoke();

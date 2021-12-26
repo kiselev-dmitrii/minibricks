@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 404859634338989819}
+  polygonCollider: {fileID: 404859634338989818}
 --- !u!50 &404859634338989819
 Rigidbody2D:
   serializedVersion: 4

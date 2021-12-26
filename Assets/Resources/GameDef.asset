@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameDef
   m_EditorClassIdentifier: 
   TowerGame:
-    SpawnHeight: 10
+    SpawnHeight: 8
     PiecePrefabs:
     - {fileID: 6417856810676443100, guid: de16f544081b64779ab5850b8de62099, type: 3}
     - {fileID: 7233542110710881965, guid: f21007e1cf07943bb9d400dee1414a2c, type: 3}
@@ -22,4 +22,5 @@ MonoBehaviour:
     - {fileID: 404859634338989812, guid: 960fb075df3884dfaacf9b121c3a7f53, type: 3}
   Piece:
     MoveStep: 0.5
-    FallSpeed: 2
+    FallSpeed: 3
+    AccelerationSpeed: 8

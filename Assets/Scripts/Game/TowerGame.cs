@@ -26,12 +26,17 @@ namespace MiniBricks.Tetris {
         private readonly Map map;
         private readonly IPieceFactory pieceFactory;
         private Piece currentPiece;
-        private float maxTouchPosition;
+        
+        public float MaxHeight { get; private set; }
+        public int NumFalls { get; private set; }
 
         public TowerGame(TowerGameDef def, Map map, IPieceFactory pieceFactory) {
             this.def = def;
             this.map = map;
             this.pieceFactory = pieceFactory;
+
+            MaxHeight = 0;
+            NumFalls = 0;
             
             foreach (var fallTrigger in map.FallTriggers) {
                 fallTrigger.Fired += OnFallTriggerFired;
@@ -45,10 +50,19 @@ namespace MiniBricks.Tetris {
         }
         
         public void Start() {
+            Physics.autoSimulation = false;
             SpawnPiece();
         }
 
+        public void Tick() {
+            Physics.Simulate(Time.deltaTime);
+        }
+
         public void ProcessCommand(CommandType commandType) {
+            if (currentPiece == null) {
+                return;
+            }
+            
             switch (commandType) {
                 case CommandType.Left:
                     currentPiece.Move(-1);
@@ -60,23 +74,18 @@ namespace MiniBricks.Tetris {
                     currentPiece.Rotate();
                     break;
                 case CommandType.StartAccelerate:
+                    currentPiece.SetAccelerated(true);
                     break;
                 case CommandType.StopAccelerate:
+                    currentPiece.SetAccelerated(false);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(commandType), commandType, null);
             }
         }
 
-        public void Finish() {
-        }
-        
-        public float GetHeight() {
-            return maxTouchPosition;
-        }
-        
         private void SpawnPiece() {
-            var spawnPoint = map.PlatformTop.position + Vector3.up * (maxTouchPosition + def.SpawnHeight);
+            var spawnPoint = map.PlatformTop.position + Vector3.up * (MaxHeight + def.SpawnHeight);
             int i = Random.Range(0, def.PiecePrefabs.Length);
             var prefab = def.PiecePrefabs[i];
             
@@ -89,25 +98,26 @@ namespace MiniBricks.Tetris {
                 throw new Exception("Something went wrong");
             }
             currentPiece.Touched -= OnCurrentPieceTouched;
-            currentPiece.Release();
+            currentPiece.SetState(PieceState.Placed);
             currentPiece = null;
             
-            UpdateMaxTouchPosition(col);
+            UpdateHeight(piece);
             SpawnPiece();
         }
 
-        private void UpdateMaxTouchPosition(Collision2D col) {
-            var maxTouchPositionInWorld = map.PlatformTop.position.y + maxTouchPosition;
-            foreach (var contact in col.contacts) {
-                if (contact.point.y > maxTouchPositionInWorld) {
-                    maxTouchPositionInWorld = contact.point.y;
+        private void UpdateHeight(Piece placedPiece) {
+            var heightInWorld = map.PlatformTop.position.y + MaxHeight;
+            foreach (var point in placedPiece.GetPoints()) {
+                if (point.y > heightInWorld) {
+                    heightInWorld = point.y;
                 }
             }
-            maxTouchPosition = maxTouchPositionInWorld - map.PlatformTop.position.y;
+            MaxHeight = heightInWorld - map.PlatformTop.position.y;
         }
 
-        private void OnFallTriggerFired(Trigger arg1, Collider2D arg2) {
-            Debug.LogError("Piece has been fallen");
+        private void OnFallTriggerFired(PieceTrigger trigger, Piece piece) {
+            NumFalls += 1;
+            piece.Destroy();
         }   
     }
 }

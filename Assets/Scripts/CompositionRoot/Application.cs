@@ -10,8 +10,10 @@ namespace MiniBricks {
         
         private void Awake() {
             var pieceFactory = new PieceFactory(gameDef.Piece);
-            var gameContextFactory = new GameContextFactory(gameDef.TowerGame, pieceFactory);
-            var lobbyController = new LobbyController(gameContextFactory);
+
+            var lobbyController = new LobbyController();
+            var gameContextFactory = new GameContextFactory(gameDef.TowerGame, pieceFactory, lobbyController);
+            lobbyController.SetGameContextFactory(gameContextFactory);
             var mainScreen = new MainScreen(lobbyController);
             mainScreen.SetActive(true);
 
