@@ -1,6 +1,6 @@
 {
     "name": "KiselevDmitry.NData.Bindings",
-    "rootNamespace": "",
+    "rootNamespace": "KiselevDmitry.NData.Bindings",
     "references": [
         "GUID:1a9cb554d6714b44bf1cce0ae9808a96",
         "GUID:6ed5940b3f93743a4a06924e408a2aad"

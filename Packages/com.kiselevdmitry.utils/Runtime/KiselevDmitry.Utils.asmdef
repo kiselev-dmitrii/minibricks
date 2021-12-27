@@ -1,3 +1,14 @@
 {
-    "name": "KiselevDmitry.Utils"
+    "name": "KiselevDmitry.Utils",
+    "rootNamespace": "KiselevDmitry.Utils",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

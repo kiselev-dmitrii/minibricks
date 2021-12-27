@@ -15,6 +15,8 @@ namespace NData
                 OnChange();
             }
         }
+
+        public abstract string GetStringValue();
     }
 
     public class Property<T> : Property
@@ -44,6 +46,10 @@ namespace NData
             return _value;
         }
 
+        public override string GetStringValue() {
+            return _value.ToString();
+        }
+        
         protected virtual bool IsValueDifferent(T value)
         {
 			return !_value.Equals(value);

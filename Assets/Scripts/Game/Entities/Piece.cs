@@ -26,6 +26,7 @@ namespace MiniBricks.Game {
         
         public event Action<Piece, Collision2D> Touched;
         public PieceState State { get; private set; }
+        public event Action<Piece> StateChanged;
         public bool IsAccelerated { get; private set; }
         
         public void Initialize(PieceDef def) {
@@ -35,7 +36,7 @@ namespace MiniBricks.Game {
             SetState(PieceState.Descending);
         }
 
-        public void SetState(PieceState state) {
+        public void SetState(PieceState state) { 
             if (state == PieceState.Descending) {
                 rb.isKinematic = true;
                 SetAccelerated(false);
@@ -45,6 +46,7 @@ namespace MiniBricks.Game {
             }
 
             State = state;
+            StateChanged?.Invoke(this);
         }
         
         public void Move(int direction) {

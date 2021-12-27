@@ -3,7 +3,7 @@ using NData;
 using UnityEngine;
 
 namespace KiselevDmitry.NData.Bindings {
-    public class GridBinding : Binding {
+    public class CollectionBinding : Binding {
         public RectTransform Template;        
         private Collection collection;
 
@@ -31,9 +31,11 @@ namespace KiselevDmitry.NData.Bindings {
 
         protected void OnItemInsert(int position, Context item) {
             var widget = Instantiate(Template);
-            widget.transform.SetParent(transform, false);
-            widget.transform.localScale = Vector3.one;
-            widget.transform.localPosition = Vector3.zero;
+            var widgetTransform = widget.transform;
+            
+            widgetTransform.SetParent(transform, false);
+            widgetTransform.localScale = Vector3.one;
+            widgetTransform.localPosition = Vector3.zero;
             widget.name = position.ToString();
 
             var itemData = widget.gameObject.AddComponent<ItemDataContext>();

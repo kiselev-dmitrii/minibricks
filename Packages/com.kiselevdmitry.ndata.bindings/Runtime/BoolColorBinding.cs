@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace KiselevDmitry.NData.Bindings {
+    [RequireComponent(typeof(Image))]
     public class BoolColorBinding : BooleanBinding {
         public Color TrueColor;
         public Color FalseColor;

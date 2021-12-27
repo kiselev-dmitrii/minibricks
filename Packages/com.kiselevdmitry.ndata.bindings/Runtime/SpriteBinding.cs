@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace KiselevDmitry.NData.Bindings {
+    [RequireComponent(typeof(Image))]
     public class SpriteBinding : Binding {
         private Image image;
         private Property<Sprite> property;
@@ -16,20 +17,23 @@ namespace KiselevDmitry.NData.Bindings {
             if (context == null) return;
 
             property = context.FindProperty<Sprite>(Path, this);
-            if (property == null) return;
-
-            property.OnChange += OnChange;
+            if (property != null) {
+                property.OnChange += OnChange;
+            }
         }
 
         protected override void Unbind() {
-            if (property == null) return;
-            property.OnChange -= OnChange;
-            property = null;
+            if (property != null) {
+                property.OnChange -= OnChange;
+                property = null;
+            }
         }
 
         protected override void OnChange() {
-            if (property == null) return;
-            Sprite sprite = property.GetValue();
+            if (property == null) {
+                return;
+            }
+            var sprite = property.GetValue();
             image.sprite = sprite;
         }
     }
