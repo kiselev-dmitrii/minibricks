@@ -29,6 +29,7 @@ namespace MiniBricks.Tetris {
         
         public float MaxHeight { get; private set; }
         public int NumFalls { get; private set; }
+        public event Action GameStarted;
 
         public TowerGame(TowerGameDef def, Map map, IPieceFactory pieceFactory) {
             this.def = def;
@@ -52,6 +53,7 @@ namespace MiniBricks.Tetris {
         public void Start() {
             Physics.autoSimulation = false;
             SpawnPiece();
+            GameStarted?.Invoke();
         }
 
         public void Tick() {

@@ -1,8 +1,23 @@
 using System;
 using System.Collections.Generic;
+using MiniBricks.Tetris;
 using UnityEngine;
 
 namespace MiniBricks.Game {
+    public class PieceFactory : IPieceFactory {
+        private readonly PieceDef pieceDef;
+
+        public PieceFactory(PieceDef pieceDef) {
+            this.pieceDef = pieceDef;
+        }
+            
+        public Piece Create(Piece prefab, Vector2 position, Transform parent) {
+            var result = GameObject.Instantiate(prefab, position, Quaternion.identity, parent);
+            result.Initialize(pieceDef);
+            return result;
+        }
+    }
+    
     [Serializable]
     public class PieceDef {
         public float MoveStep;

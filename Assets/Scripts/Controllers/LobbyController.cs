@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using MiniBricks.Utils;
 
 namespace MiniBricks.Controllers {
     public enum GameState {
@@ -8,29 +10,45 @@ namespace MiniBricks.Controllers {
         InGame,
         Leaving
     }
+
+    public enum GameType {
+        Training,
+        Battle
+    }
+    
+    public interface IGameLauncher {
+        GameType Type { get; }
+        IDisposable Launch();
+    }
     
     public class LobbyController {
-        private GameContextFactory gameContextFactory;
-        private GameContext gameContext;
-        
-        public LobbyController() {
-            GameState = GameState.Menu;
-        }
+        private readonly Dictionary<GameType, IGameLauncher> launchers;
+        private IDisposable gameContext;
         
         public GameState GameState { get; private set; }
         public event Action GameStateChanged;
+        
+        public LobbyController() {
+            launchers = new Dictionary<GameType, IGameLauncher>();
+            GameState = GameState.Menu;
+        }
 
-        public void SetGameContextFactory(GameContextFactory value) {
-            gameContextFactory = value;
+        public void AddGameLauncher(IGameLauncher launcher) {
+            launchers.Add(launcher.Type, launcher);
         }
         
-        public async Task StartGame() {
+        public async Task StartGame(GameType gameType) {
+            var launcher = launchers.Get(gameType);
+            if (launcher == null) {
+                throw new ArgumentException($"There is no launcher of {gameType} game");
+            }
+            
             GameState = GameState.Starting;
             GameStateChanged?.Invoke();
 
             await Task.Delay(1000);
 
-            gameContext = gameContextFactory.Create();
+            gameContext = launcher.Launch();
             GameState = GameState.InGame;
             GameStateChanged?.Invoke();
         }

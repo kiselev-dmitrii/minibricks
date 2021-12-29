@@ -1,6 +1,8 @@
 using System;
 using MiniBricks.Controllers;
+using MiniBricks.Game;
 using MiniBricks.UI;
+using MiniBricks.Utils;
 using UnityEngine;
 
 namespace MiniBricks {
@@ -12,8 +14,14 @@ namespace MiniBricks {
             var pieceFactory = new PieceFactory(gameDef.Piece);
 
             var lobbyController = new LobbyController();
-            var gameContextFactory = new GameContextFactory(gameDef.TowerGame, pieceFactory, lobbyController);
-            lobbyController.SetGameContextFactory(gameContextFactory);
+            var tickProvider = gameObject.AddComponent<TickProvider>();
+            
+            var trainingGameLauncher = new TrainingGameLauncher(gameDef.TowerGame, pieceFactory, lobbyController, tickProvider);
+            lobbyController.AddGameLauncher(trainingGameLauncher);
+
+            var battleGameLauncher = new BattleGameLauncher(gameDef.TowerGame, pieceFactory, tickProvider);
+            lobbyController.AddGameLauncher(battleGameLauncher);
+            
             var mainScreen = new MainScreen(lobbyController);
             mainScreen.SetActive(true);
 

@@ -2,25 +2,25 @@ using System;
 using UnityEngine;
 
 namespace MiniBricks.Game.Commands {
-    public class KeyboardCommandProvider : MonoBehaviour, ICommandProvider {
-        public event Action<CommandType> CommandEmitted;
-
-        public void Update() {
+    public class KeyboardCommandProvider : ICommandProvider {
+        public CommandType? GetNextCommand() {
             if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-                CommandEmitted?.Invoke(CommandType.Left);
+                return CommandType.Left;
             }
             if (Input.GetKeyDown(KeyCode.RightArrow)) {
-                CommandEmitted?.Invoke(CommandType.Right);
+                return CommandType.Right;
             }
             if (Input.GetKeyDown(KeyCode.UpArrow)) {
-                CommandEmitted?.Invoke(CommandType.Rotate);
+                return CommandType.Rotate;
             }
             if (Input.GetKeyDown(KeyCode.DownArrow)) {
-                CommandEmitted?.Invoke(CommandType.StartAccelerate);
+                return CommandType.StartAccelerate;
             }
             if (Input.GetKeyUp(KeyCode.DownArrow)) {
-                CommandEmitted?.Invoke(CommandType.StopAccelerate);   
+                return CommandType.StartAccelerate;
             }
+
+            return null;
         }
     }
 }

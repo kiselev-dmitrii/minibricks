@@ -1,5 +1,3 @@
-using System;
-
 namespace MiniBricks.Game.Commands {
     public enum CommandType {
         Left,
@@ -10,6 +8,6 @@ namespace MiniBricks.Game.Commands {
     }
     
     public interface ICommandProvider {
-        event Action<CommandType> CommandEmitted;
+        public CommandType? GetNextCommand();
     }
 }
