@@ -42,6 +42,7 @@ namespace MiniBricks.Controllers {
                 game = new TowerGame(launcher.towerGameDef, map1, launcher.pieceFactory);
                 input = new KeyboardCommandProvider();
                 gameScreen = new GameScreen(game);
+                gameScreen.SetActive(true);
                 
                 game.Start();
                 

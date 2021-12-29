@@ -17,7 +17,7 @@ namespace MiniBricks.Game.Commands {
                 return CommandType.StartAccelerate;
             }
             if (Input.GetKeyUp(KeyCode.DownArrow)) {
-                return CommandType.StartAccelerate;
+                return CommandType.StopAccelerate;
             }
 
             return null;
