@@ -1,6 +1,6 @@
 using System;
 using MiniBricks.Game;
-using MiniBricks.Game.Commands;
+using MiniBricks.Game.CommandProviders;
 using MiniBricks.Tetris;
 using MiniBricks.UI;
 using MiniBricks.Utils;
@@ -61,12 +61,12 @@ namespace MiniBricks.Controllers {
             public void Tick() {
                 var cmd1 = tower1Input.GetNextCommand();
                 if (cmd1 != null) {
-                    towerGame1.ProcessCommand(cmd1.Value);
+                    towerGame1.AddCommand(cmd1);
                 }
     
                 var cmd2 = tower2Input.GetNextCommand();
                 if (cmd2 != null) {
-                    towerGame2.ProcessCommand(cmd2.Value);
+                    towerGame2.AddCommand(cmd2);
                 }
                 
                 towerGame1.Tick();

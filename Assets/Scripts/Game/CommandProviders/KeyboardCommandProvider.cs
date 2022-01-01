@@ -1,23 +1,24 @@
-using System;
+using MiniBricks.Game.Commands;
+using MiniBricks.Tetris;
 using UnityEngine;
 
-namespace MiniBricks.Game.Commands {
+namespace MiniBricks.Game.CommandProviders {
     public class KeyboardCommandProvider : ICommandProvider {
-        public CommandType? GetNextCommand() {
+        public ICommand GetNextCommand() {
             if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-                return CommandType.Left;
+                return new LeftCommand();
             }
             if (Input.GetKeyDown(KeyCode.RightArrow)) {
-                return CommandType.Right;
+                return new RightCommand();
             }
             if (Input.GetKeyDown(KeyCode.UpArrow)) {
-                return CommandType.Rotate;
+                return new RotateCommand();
             }
             if (Input.GetKeyDown(KeyCode.DownArrow)) {
-                return CommandType.StartAccelerate;
+                return new StartAccelerateCommand();
             }
             if (Input.GetKeyUp(KeyCode.DownArrow)) {
-                return CommandType.StopAccelerate;
+                return new StopAccelerateCommand();
             }
 
             return null;

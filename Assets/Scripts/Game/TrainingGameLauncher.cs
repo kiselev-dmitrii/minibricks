@@ -1,5 +1,5 @@
 using System;
-using MiniBricks.Game.Commands;
+using MiniBricks.Game.CommandProviders;
 using MiniBricks.Tetris;
 using MiniBricks.UI;
 using MiniBricks.Utils;
@@ -51,7 +51,7 @@ namespace MiniBricks.Controllers {
             public void Tick() {
                 var cmd1 = input.GetNextCommand();
                 if (cmd1 != null) {
-                    game.ProcessCommand(cmd1.Value);
+                    game.AddCommand(cmd1);
                 }
                 game.Tick();
                 gameScreen.Update();

@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using MiniBricks.Game;
-using MiniBricks.Game.Commands;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,6 +21,10 @@ namespace MiniBricks.Tetris {
         Piece Create(Piece prefab, Vector2 position, Transform parent);
     }
 
+    public interface ICommand {
+        void Execute(Piece piece);
+    }
+
     public class TowerGame : IDisposable {
         private readonly TowerGameDef def;
         private readonly Map map;
@@ -29,7 +33,6 @@ namespace MiniBricks.Tetris {
         
         public float MaxHeight { get; private set; }
         public int NumFalls { get; private set; }
-        public event Action GameStarted;
 
         public TowerGame(TowerGameDef def, Map map, IPieceFactory pieceFactory) {
             this.def = def;
@@ -53,37 +56,17 @@ namespace MiniBricks.Tetris {
         public void Start() {
             Physics.autoSimulation = false;
             SpawnPiece();
-            GameStarted?.Invoke();
         }
 
         public void Tick() {
             Physics.Simulate(Time.deltaTime);
         }
 
-        public void ProcessCommand(CommandType commandType) {
+        public void AddCommand(ICommand command) {
             if (currentPiece == null) {
                 return;
             }
-            
-            switch (commandType) {
-                case CommandType.Left:
-                    currentPiece.Move(-1);
-                    break;
-                case CommandType.Right:
-                    currentPiece.Move(1);
-                    break;
-                case CommandType.Rotate:
-                    currentPiece.Rotate();
-                    break;
-                case CommandType.StartAccelerate:
-                    currentPiece.SetAccelerated(true);
-                    break;
-                case CommandType.StopAccelerate:
-                    currentPiece.SetAccelerated(false);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(commandType), commandType, null);
-            }
+            command.Execute(currentPiece);
         }
 
         private void SpawnPiece() {
