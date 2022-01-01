@@ -30,8 +30,12 @@ namespace MiniBricks.Controllers {
         
         private class BattleGameRunner : IDisposable, ITickable {
             private readonly BattleGameLauncher launcher;
+            
+            private readonly Map map1;
             private readonly ICommandProvider tower1Input;
             private readonly TowerGame towerGame1;
+
+            private readonly Map map2;
             private readonly ICommandProvider tower2Input;
             private readonly TowerGame towerGame2;
             private readonly GameScreen gameScreen;
@@ -40,11 +44,11 @@ namespace MiniBricks.Controllers {
                 this.launcher = launcher;
                 var mapPrefab = Resources.Load<Map>("Maps/Map01");
                 
-                var map1 = Object.Instantiate(mapPrefab);
+                map1 = Object.Instantiate(mapPrefab);
                 towerGame1 = new TowerGame(launcher.towerGameDef, map1, launcher.pieceFactory);
                 tower1Input = new KeyboardCommandProvider();
                 
-                var map2 = Object.Instantiate(mapPrefab, Vector3.right*100, Quaternion.identity);
+                map2 = Object.Instantiate(mapPrefab, Vector3.right*100, Quaternion.identity);
                 map2.Camera.enabled = false;
                 towerGame2 = new TowerGame(launcher.towerGameDef, map2, launcher.pieceFactory);
                 tower2Input = new RandomCommandProvider(1);
@@ -80,6 +84,8 @@ namespace MiniBricks.Controllers {
                 towerGame1.Dispose();
                 towerGame2.Dispose();
                 launcher.tickProvider.RemoveTickable(this);
+                GameObject.Destroy(map1.gameObject);
+                GameObject.Destroy(map2.gameObject);
             }
         }
     

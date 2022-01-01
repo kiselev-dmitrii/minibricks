@@ -21,13 +21,13 @@ namespace MiniBricks.UI {
             this.lobbyController = lobbyController;
         }
 
-        public void OnBackButtonClick() {
-            Destroy();
-        }
-
         public async void OnQuitButtonClick() {
             Destroy();
             await lobbyController.LeaveGame();
+        }
+        
+        public void OnContinueButtonClick() {
+            Destroy();
         }
     }
 }

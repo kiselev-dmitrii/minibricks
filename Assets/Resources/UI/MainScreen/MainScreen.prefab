@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 6175800141292314964}
   - component: {fileID: 3312282383447585418}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c6526c9d4c10c45b8975cbdcf8975f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: OnStrtBattleButtonClick
+  Path: OnStartBattleButtonClick
 --- !u!114 &8914900996902304604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,11 +709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ed056f08874d9c94f615b306031e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  downScale: 0.9
-  downDuration: 0.1
-  upScale: 1.05
-  upDuration: 0.1
-  resetDuration: 0.05
 --- !u!1 &7978790489457748770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,8 +1097,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ed056f08874d9c94f615b306031e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  downScale: 0.9
-  downDuration: 0.1
-  upScale: 1.05
-  upDuration: 0.1
-  resetDuration: 0.05
