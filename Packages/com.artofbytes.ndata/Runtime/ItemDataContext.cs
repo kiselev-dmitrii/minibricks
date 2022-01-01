@@ -31,7 +31,7 @@ namespace NData {
 				return _context;
 			}
 		}
-		public virtual void SetContext(Context c, bool includeInactive = false)
+		public virtual void SetContext(IContext c, bool includeInactive = false)
 		{
 			_context =  c;
 
