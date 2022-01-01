@@ -1,18 +1,25 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 namespace MiniBricks.Game.Entities {
+    [RequireComponent(typeof(Piece), typeof(SpriteRenderer))]
     public class PieceTouchEffect : MonoBehaviour {
         [SerializeField]
-        private Piece piece;
+        private float duration = 0.1f;
         [SerializeField]
-        private SpriteRenderer sr;
+        private float intensity = 0.5f;
 
+        private Piece piece;
+        private SpriteRenderer spriteRenderer;
         private Color originalColor;
-        
+
         public void Awake() {
+            piece = GetComponent<Piece>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            
             piece.StateChanged += OnStateChanged;
-            originalColor = sr.color;
+            originalColor = spriteRenderer.color;
         }
 
         public void OnDestroy() {
@@ -20,15 +27,16 @@ namespace MiniBricks.Game.Entities {
         }
 
         private void OnStateChanged(Piece _) {
-            if (piece.State == PieceState.Placed) {
-                StartCoroutine(PlayEffect());
+            if (piece.State != PieceState.Placed) {
+                return;
             }
-        }
 
-        private IEnumerator PlayEffect() {
-            sr.color = originalColor + Color.white * 0.1f;
-            yield return new WaitForSeconds(0.3f);
-            sr.color = originalColor;
+            var targetColor = originalColor + intensity*Color.white;
+            
+            var sequence = DOTween.Sequence();
+            sequence.Append(spriteRenderer.DOColor(targetColor, duration/2));
+            sequence.Append(spriteRenderer.DOColor(originalColor, duration / 2));
+            sequence.Play();
         }
     }
 }
