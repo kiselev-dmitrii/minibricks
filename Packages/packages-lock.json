@@ -6,6 +6,12 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.demigiant.dotween": {
+      "version": "file:com.demigiant.dotween",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.kiselevdmitry.ndata.bindings": {
       "version": "file:com.kiselevdmitry.ndata.bindings",
       "depth": 0,
