@@ -48,7 +48,8 @@ namespace MiniBricks.UI {
         }
         
         public void OnPauseButtonClick() {
-            pauseWindowFactory.Create();
+            var window = pauseWindowFactory.Create();
+            window.SetActive(true);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,6 +11,8 @@ namespace MiniBricks.Utils {
         private const float upDuration = 0.05f;
         private const float resetDuration = 0.01f;
 
+        private Sequence lastSequence;
+        
         public void OnPointerDown(PointerEventData eventData) {
             transform.DOScale(downScale * Vector3.one, downDuration);
         }
@@ -19,6 +22,11 @@ namespace MiniBricks.Utils {
             sequence.Append(transform.DOScale(upScale * Vector3.one, upDuration));
             sequence.Append(transform.DOScale(Vector3.one, resetDuration));
             sequence.Play();
+            lastSequence = sequence;
+        }
+
+        private void OnDestroy() {
+            lastSequence?.Kill();
         }
     }
 }

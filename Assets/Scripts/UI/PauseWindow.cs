@@ -26,6 +26,7 @@ namespace MiniBricks.UI {
         }
 
         public async void OnQuitButtonClick() {
+            Destroy();
             await lobbyController.LeaveGame();
         }
     }
