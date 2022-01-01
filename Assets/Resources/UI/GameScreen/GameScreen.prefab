@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6012849414513057846}
   - component: {fileID: 5281385875566749019}
   - component: {fileID: 8778996216852348131}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Height
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 3523264541022378239}
   - component: {fileID: 8299782645301094277}
   - component: {fileID: 7444494709111786955}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 7837050825024827003}
   - component: {fileID: 5105186375458417607}
   - component: {fileID: 3017791219640684883}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Lives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 8980682597719571783}
   - component: {fileID: 8980682597719571780}
   - component: {fileID: 8980682597719571781}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TopLeftPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 8980682597954675746}
   - component: {fileID: 8980682597954675747}
   - component: {fileID: 796421163}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ Canvas:
   m_GameObject: {fileID: 8980682597954675749}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

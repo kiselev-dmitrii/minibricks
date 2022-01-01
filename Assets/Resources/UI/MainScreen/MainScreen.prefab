@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1360579698895144841}
   - component: {fileID: 7494363204297240095}
   - component: {fileID: 8980682597305059347}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StartBattleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4646385355338636520}
   - component: {fileID: 2867410400532797026}
   - component: {fileID: 4022691624093293750}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Bricks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4416803756854850182}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Logo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 3811351937667385391}
   - component: {fileID: 8404537653596938488}
   - component: {fileID: 1286959776217495869}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cloud1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 8512971758569909176}
   - component: {fileID: 5411020778278361934}
   - component: {fileID: 8560375617449067790}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mini
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 2662341043492410106}
   - component: {fileID: 3482846097670377379}
   - component: {fileID: 1942522550061031761}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +547,7 @@ GameObject:
   - component: {fileID: 4976788833259031107}
   - component: {fileID: 4575057213756420311}
   - component: {fileID: 1733429448364894902}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 1017276516251483371}
   - component: {fileID: 6598297655629097099}
   - component: {fileID: 5786219613717255570}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5211029153270188074}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 5571044462504389354}
   - component: {fileID: 4260544452231675686}
   - component: {fileID: 7927253819454457865}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cloud2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 8980682597719571781}
   - component: {fileID: 8559242705278510249}
   - component: {fileID: 8980682597305059345}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StartTrainingButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -937,7 +937,7 @@ GameObject:
   - component: {fileID: 8980682597954675746}
   - component: {fileID: 8980682597954675747}
   - component: {fileID: 796421163}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MainScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -976,7 +976,7 @@ Canvas:
   m_GameObject: {fileID: 8980682597954675749}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

@@ -4,9 +4,21 @@ using NData;
 using UnityEngine;
 
 namespace MiniBricks.UI {
-    public class GameScreen : Window {
-        private readonly TowerGame towerGame;
+    public class GameScreenFactory {
+        private readonly PauseWindowFactory pauseWindowFactory;
 
+        public GameScreenFactory(PauseWindowFactory pauseWindowFactory) {
+            this.pauseWindowFactory = pauseWindowFactory;
+        }
+
+        public GameScreen Create(TowerGame towerGame) {
+            return new GameScreen(towerGame, pauseWindowFactory);
+        }
+    }
+    
+    public class GameScreen : Window {
+        private readonly PauseWindowFactory pauseWindowFactory;
+        
         #region Property NumLives
         public Property<int> NumLivesProperty { get; } = new Property<int>();
         public int NumLives {
@@ -23,8 +35,11 @@ namespace MiniBricks.UI {
         }
         #endregion
         
-        public GameScreen(TowerGame towerGame) : base("UI/GameScreen/GameScreen") {
+        private readonly TowerGame towerGame;
+        
+        public GameScreen(TowerGame towerGame, PauseWindowFactory pauseWindowFactory) : base("UI/GameScreen/GameScreen") {
             this.towerGame = towerGame;
+            this.pauseWindowFactory = pauseWindowFactory;
         }
 
         public void Update() {
@@ -33,7 +48,7 @@ namespace MiniBricks.UI {
         }
         
         public void OnPauseButtonClick() {
-            
+            pauseWindowFactory.Create();
         }
     }
 }

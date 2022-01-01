@@ -1,5 +1,4 @@
 using System;
-using MiniBricks.Game;
 using MiniBricks.Game.Commands;
 using MiniBricks.Tetris;
 using MiniBricks.UI;
@@ -11,15 +10,15 @@ namespace MiniBricks.Controllers {
     public class TrainingGameLauncher : IGameLauncher {
         private readonly TowerGameDef towerGameDef;
         private readonly IPieceFactory pieceFactory;
-        private readonly LobbyController lobbyController;
         private readonly TickProvider tickProvider;
+        private readonly GameScreenFactory gameScreenFactory;
 
         public TrainingGameLauncher(TowerGameDef towerGameDef, IPieceFactory pieceFactory, 
-                                    LobbyController lobbyController, TickProvider tickProvider) {
+                                    TickProvider tickProvider, GameScreenFactory gameScreenFactory) {
             this.towerGameDef = towerGameDef;
             this.pieceFactory = pieceFactory;
-            this.lobbyController = lobbyController;
             this.tickProvider = tickProvider;
+            this.gameScreenFactory = gameScreenFactory;
         }
 
         public GameType Type => GameType.Training;
@@ -41,7 +40,7 @@ namespace MiniBricks.Controllers {
                 var map1 = Object.Instantiate(mapPrefab);
                 game = new TowerGame(launcher.towerGameDef, map1, launcher.pieceFactory);
                 input = new KeyboardCommandProvider();
-                gameScreen = new GameScreen(game);
+                gameScreen = launcher.gameScreenFactory.Create(game);
                 gameScreen.SetActive(true);
                 
                 game.Start();

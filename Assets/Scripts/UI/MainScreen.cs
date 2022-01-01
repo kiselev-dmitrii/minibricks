@@ -2,6 +2,19 @@ using MiniBricks.Controllers;
 using MiniBricks.Utils;
 
 namespace MiniBricks.UI {
+    public class MainScreenFactory {
+        private readonly LobbyController lobbyController;
+        private readonly WindowManager windwWindowManager;
+
+        public MainScreenFactory(LobbyController lobbyController) {
+            this.lobbyController = lobbyController;
+        }
+
+        public MainScreen Create() {
+            return new MainScreen(lobbyController);
+        }
+    }
+    
     public class MainScreen : Window {
         private readonly LobbyController lobbyController;
 

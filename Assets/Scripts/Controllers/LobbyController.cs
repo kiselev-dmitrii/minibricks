@@ -37,7 +37,7 @@ namespace MiniBricks.Controllers {
             launchers.Add(launcher.Type, launcher);
         }
         
-        public async Task StartGame(GameType gameType) {
+        public Task StartGame(GameType gameType) {
             var launcher = launchers.Get(gameType);
             if (launcher == null) {
                 throw new ArgumentException($"There is no launcher of {gameType} game");
@@ -46,23 +46,27 @@ namespace MiniBricks.Controllers {
             GameState = GameState.Starting;
             GameStateChanged?.Invoke();
 
-            await Task.Delay(1000);
+            //await Task.Delay(1000);
 
             gameContext = launcher.Launch();
             GameState = GameState.InGame;
             GameStateChanged?.Invoke();
+
+            return Task.FromResult(0);
         }
 
-        public async Task LeaveGame() {
+        public Task LeaveGame() {
             GameState = GameState.Leaving;
             GameStateChanged?.Invoke();
             
-            await Task.Delay(1000);
+            //await Task.Delay(1000);
             
             gameContext.Dispose();
 
             GameState = GameState.Menu;
             GameStateChanged?.Invoke();
+            
+            return Task.FromResult(0);
         }
     }
 }

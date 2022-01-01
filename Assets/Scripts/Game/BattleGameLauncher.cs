@@ -12,11 +12,14 @@ namespace MiniBricks.Controllers {
         private readonly TowerGameDef towerGameDef;
         private readonly PieceFactory pieceFactory;
         private readonly TickProvider tickProvider;
+        private readonly GameScreenFactory gameScreenFactory;
 
-        public BattleGameLauncher(TowerGameDef towerGameDef, PieceFactory pieceFactory, TickProvider tickProvider) {
+        public BattleGameLauncher(TowerGameDef towerGameDef, PieceFactory pieceFactory, 
+            TickProvider tickProvider, GameScreenFactory gameScreenFactory) {
             this.towerGameDef = towerGameDef;
             this.pieceFactory = pieceFactory;
             this.tickProvider = tickProvider;
+            this.gameScreenFactory = gameScreenFactory;
         }
 
         public GameType Type => GameType.Battle;
@@ -42,10 +45,11 @@ namespace MiniBricks.Controllers {
                 tower1Input = new KeyboardCommandProvider();
                 
                 var map2 = Object.Instantiate(mapPrefab, Vector3.right*100, Quaternion.identity);
+                map2.Camera.enabled = false;
                 towerGame2 = new TowerGame(launcher.towerGameDef, map2, launcher.pieceFactory);
                 tower2Input = new RandomCommandProvider(1);
                 
-                gameScreen = new GameScreen(towerGame1);
+                gameScreen = launcher.gameScreenFactory.Create(towerGame1);
                 gameScreen.SetActive(true);
                 
                 towerGame1.Start();
@@ -62,7 +66,7 @@ namespace MiniBricks.Controllers {
     
                 var cmd2 = tower2Input.GetNextCommand();
                 if (cmd2 != null) {
-                    towerGame1.ProcessCommand(cmd2.Value);
+                    towerGame2.ProcessCommand(cmd2.Value);
                 }
                 
                 towerGame1.Tick();
