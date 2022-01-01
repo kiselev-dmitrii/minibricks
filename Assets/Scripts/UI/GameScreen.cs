@@ -11,8 +11,8 @@ namespace MiniBricks.UI {
             this.pauseWindowFactory = pauseWindowFactory;
         }
 
-        public GameScreen Create(TowerGame towerGame) {
-            return new GameScreen(towerGame, pauseWindowFactory);
+        public GameScreen Create(EndGameFeature endGameFeature) {
+            return new GameScreen(endGameFeature, pauseWindowFactory);
         }
     }
     
@@ -34,17 +34,17 @@ namespace MiniBricks.UI {
             set => HeightProperty.SetValue(value);
         }
         #endregion
+
+        private readonly EndGameFeature endGameFeature;
         
-        private readonly TowerGame towerGame;
-        
-        public GameScreen(TowerGame towerGame, PauseWindowFactory pauseWindowFactory) : base("UI/GameScreen/GameScreen") {
-            this.towerGame = towerGame;
+        public GameScreen(EndGameFeature endGameFeature, PauseWindowFactory pauseWindowFactory) : base("UI/GameScreen/GameScreen") {
+            this.endGameFeature = endGameFeature;
             this.pauseWindowFactory = pauseWindowFactory;
         }
 
         public void Update() {
-            NumLives = 3 - towerGame.NumFalls;
-            Height = Mathf.RoundToInt(towerGame.MaxHeight);
+            NumLives = endGameFeature.GetLives();
+            Height = endGameFeature.GetHeight();
         }
         
         public void OnPauseButtonClick() {

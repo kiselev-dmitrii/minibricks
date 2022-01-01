@@ -25,9 +25,10 @@ namespace MiniBricks.Controllers {
         public GameType Type => GameType.Battle;
 
         public IDisposable Launch() {
-            return new BattleGameRunner(this);
+            return null;
         }
         
+        /*
         private class BattleGameRunner : IDisposable, ITickable {
             private readonly BattleGameLauncher launcher;
             
@@ -88,6 +89,7 @@ namespace MiniBricks.Controllers {
                 GameObject.Destroy(map2.gameObject);
             }
         }
+        */
     
     }
 }

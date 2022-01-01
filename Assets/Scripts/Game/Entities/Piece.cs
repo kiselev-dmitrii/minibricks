@@ -4,7 +4,7 @@ using MiniBricks.Tetris;
 using UnityEngine;
 
 namespace MiniBricks.Game {
-    public class PieceFactory : IPieceFactory {
+    public class PieceFactory {
         private readonly PieceDef pieceDef;
 
         public PieceFactory(PieceDef pieceDef) {

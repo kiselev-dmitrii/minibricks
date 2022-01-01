@@ -20,6 +20,8 @@ MonoBehaviour:
     - {fileID: 5136324500867999720, guid: c6632ed7e177d4af5b3499d3b3f5a257, type: 3}
     - {fileID: 8821802864023561292, guid: 17851510f62fd4a63a2386d1306fa6ef, type: 3}
     - {fileID: 404859634338989812, guid: 960fb075df3884dfaacf9b121c3a7f53, type: 3}
+    NumLives: 5
+    RequiredHeight: 40
   Piece:
     MoveStep: 0.5
     FallSpeed: 3

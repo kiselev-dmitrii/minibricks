@@ -1,4 +1,5 @@
 using System;
+using MiniBricks.Game;
 using MiniBricks.Game.CommandProviders;
 using MiniBricks.Tetris;
 using MiniBricks.UI;
@@ -9,11 +10,11 @@ using Object = UnityEngine.Object;
 namespace MiniBricks.Controllers {
     public class TrainingGameLauncher : IGameLauncher {
         private readonly TowerGameDef towerGameDef;
-        private readonly IPieceFactory pieceFactory;
+        private readonly PieceFactory pieceFactory;
         private readonly TickProvider tickProvider;
         private readonly GameScreenFactory gameScreenFactory;
 
-        public TrainingGameLauncher(TowerGameDef towerGameDef, IPieceFactory pieceFactory, 
+        public TrainingGameLauncher(TowerGameDef towerGameDef, PieceFactory pieceFactory, 
                                     TickProvider tickProvider, GameScreenFactory gameScreenFactory) {
             this.towerGameDef = towerGameDef;
             this.pieceFactory = pieceFactory;
@@ -28,32 +29,33 @@ namespace MiniBricks.Controllers {
         }
         
         private class TrainingGameRunner : IDisposable, ITickable {
-            private readonly TrainingGameLauncher launcher;
+            private readonly TrainingGameLauncher l;
             private readonly Map map1;
-            private readonly ICommandProvider input;
-            private readonly TowerGame game;
+            private readonly GameSimulation game;
             private readonly GameScreen gameScreen;
             
-            public TrainingGameRunner(TrainingGameLauncher launcher) {
-                this.launcher = launcher;
+            public TrainingGameRunner(TrainingGameLauncher l) {
+                this.l = l;
                 var mapPrefab = Resources.Load<Map>("Maps/Map01");
                 
+                var input = new KeyboardCommandProvider();
+                
                 map1 = Object.Instantiate(mapPrefab);
-                game = new TowerGame(launcher.towerGameDef, map1, launcher.pieceFactory);
-                input = new KeyboardCommandProvider();
-                gameScreen = launcher.gameScreenFactory.Create(game);
+                game = new GameSimulation();
+                game.AddFeature(new PhysicsFeature());
+                game.AddFeature(new TetrisFeature(game, map1, l.towerGameDef, l.pieceFactory));
+                game.AddFeature(new InputFeature(game, input));
+                game.AddFeature(new EndGameFeature(game, l.towerGameDef));
+            
+                gameScreen = l.gameScreenFactory.Create(game.GetFeature<EndGameFeature>());
                 gameScreen.SetActive(true);
                 
                 game.Start();
                 
-                launcher.tickProvider.AddTickable(this);
+                l.tickProvider.AddTickable(this);
             }
     
             public void Tick() {
-                var cmd1 = input.GetNextCommand();
-                if (cmd1 != null) {
-                    game.AddCommand(cmd1);
-                }
                 game.Tick();
                 gameScreen.Update();
             }
@@ -61,7 +63,7 @@ namespace MiniBricks.Controllers {
             public void Dispose() {
                 gameScreen.Destroy();
                 game.Dispose();
-                launcher.tickProvider.RemoveTickable(this);
+                l.tickProvider.RemoveTickable(this);
                 GameObject.Destroy(map1.gameObject);
             }
         }
