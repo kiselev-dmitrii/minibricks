@@ -41,11 +41,14 @@ namespace MiniBricks.Controllers {
                 var input = new KeyboardCommandProvider();
                 
                 map1 = Object.Instantiate(mapPrefab);
+                
                 game = new GameSimulation();
-                game.AddFeature(new InputFeature(game, input));
                 game.AddFeature(new TetrisFeature(game, map1, l.towerGameDef, l.pieceFactory));
+                game.AddFeature(new InputFeature(game.GetFeature<TetrisFeature>(), input));
                 game.AddFeature(new EndGameFeature(game, l.towerGameDef));
             
+                map1.Camera.GetComponent<FollowCamera>().Initialize(game.GetFeature<TetrisFeature>());
+                
                 gameScreen = l.gameScreenFactory.Create(game);
                 gameScreen.SetActive(true);
                 

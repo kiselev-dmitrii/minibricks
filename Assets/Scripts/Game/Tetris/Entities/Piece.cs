@@ -82,6 +82,10 @@ namespace MiniBricks.Game {
             IsAccelerated = isEnabled;
         }
 
+        public Vector3 GetPosition() {
+            return cachedTransform.position;
+        }
+        
         public void Destroy() {
             GameObject.Destroy(gameObject);
         }

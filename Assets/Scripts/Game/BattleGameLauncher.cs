@@ -25,71 +25,70 @@ namespace MiniBricks.Controllers {
         public GameType Type => GameType.Battle;
 
         public IDisposable Launch() {
-            return null;
+            return new BattleGameRunner(this);
         }
         
-        /*
         private class BattleGameRunner : IDisposable, ITickable {
-            private readonly BattleGameLauncher launcher;
+            private readonly BattleGameLauncher l;
             
             private readonly Map map1;
-            private readonly ICommandProvider tower1Input;
-            private readonly TowerGame towerGame1;
+            private readonly GameSimulation game1;
 
             private readonly Map map2;
-            private readonly ICommandProvider tower2Input;
-            private readonly TowerGame towerGame2;
+            private readonly GameSimulation game2;
             private readonly GameScreen gameScreen;
             
-            public BattleGameRunner(BattleGameLauncher launcher) {
-                this.launcher = launcher;
+            public BattleGameRunner(BattleGameLauncher l) {
+                this.l = l;
                 var mapPrefab = Resources.Load<Map>("Maps/Map01");
                 
+                var input1 = new KeyboardCommandProvider();
                 map1 = Object.Instantiate(mapPrefab);
-                towerGame1 = new TowerGame(launcher.towerGameDef, map1, launcher.pieceFactory);
-                tower1Input = new KeyboardCommandProvider();
-                
+                game1 = new GameSimulation();
+                game1.AddFeatures(new IFeature[] {
+                    /*
+                    new InputFeature(game1, input1),
+                    new TetrisFeature(game1, map1, l.towerGameDef, l.pieceFactory),
+                    new EndGameFeature(game1, l.towerGameDef)
+                    */
+                });
+
+                var input2 = new RandomCommandProvider(1);
                 map2 = Object.Instantiate(mapPrefab, Vector3.right*100, Quaternion.identity);
+                game2 = new GameSimulation();
+                game2.AddFeatures(new IFeature[] {
+                    /*
+                    new InputFeature(game2, input2),
+                    new TetrisFeature(game2, map2, l.towerGameDef, l.pieceFactory),
+                    new EndGameFeature(game2, l.towerGameDef)
+                    */
+                });
                 map2.Camera.enabled = false;
-                towerGame2 = new TowerGame(launcher.towerGameDef, map2, launcher.pieceFactory);
-                tower2Input = new RandomCommandProvider(1);
                 
-                gameScreen = launcher.gameScreenFactory.Create(towerGame1);
+                gameScreen = l.gameScreenFactory.Create(game1);
                 gameScreen.SetActive(true);
                 
-                towerGame1.Start();
-                towerGame2.Start();
+                game1.Start();
+                game2.Start();
                 
-                launcher.tickProvider.AddTickable(this);
+                l.tickProvider.AddTickable(this);
             }
     
             public void Tick() {
-                var cmd1 = tower1Input.GetNextCommand();
-                if (cmd1 != null) {
-                    towerGame1.AddCommand(cmd1);
-                }
-    
-                var cmd2 = tower2Input.GetNextCommand();
-                if (cmd2 != null) {
-                    towerGame2.AddCommand(cmd2);
-                }
-                
-                towerGame1.Tick();
-                towerGame2.Tick();
-                
+                game1.Tick();
+                game2.Tick();
                 gameScreen.Update();
             }
             
             public void Dispose() {
                 gameScreen.Destroy();
-                towerGame1.Dispose();
-                towerGame2.Dispose();
-                launcher.tickProvider.RemoveTickable(this);
+                game1.Dispose();
+                game2.Dispose();
+                l.tickProvider.RemoveTickable(this);
                 GameObject.Destroy(map1.gameObject);
                 GameObject.Destroy(map2.gameObject);
             }
         }
-        */
     
     }
 }

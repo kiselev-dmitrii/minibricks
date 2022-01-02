@@ -6,17 +6,15 @@ namespace MiniBricks.Tetris {
     }
     
     public class InputFeature : IFeature {
-        private readonly GameSimulation game;
+        private readonly TetrisFeature tetrisFeature;
         private readonly ICommandProvider commandProvider;
-        private GameData data;
 
-        public InputFeature(GameSimulation game, ICommandProvider commandProvider) {
-            this.game = game;
+        public InputFeature(TetrisFeature tetrisFeature, ICommandProvider commandProvider) {
+            this.tetrisFeature = tetrisFeature;
             this.commandProvider = commandProvider;
         }
         
         public void GameStarted() {
-            data = game.Data;
         }
 
         public void Tick() {
@@ -24,11 +22,11 @@ namespace MiniBricks.Tetris {
             if (command == null) {
                 return;
             }
-            if (data.CurrentPiece == null) {
+            if (tetrisFeature.CurrentPiece == null) {
                 return;
             }
             
-            command.Execute(data.CurrentPiece);
+            command.Execute(tetrisFeature.CurrentPiece);
         }
 
         public void GameFinished(GameResult result) {

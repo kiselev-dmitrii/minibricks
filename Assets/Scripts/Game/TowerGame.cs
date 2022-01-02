@@ -64,7 +64,7 @@ namespace MiniBricks.Tetris {
         Running,
         Finished
     }
-    
+
     public class GameSimulation : IDisposable {
         private readonly List<IFeature> features;
         
@@ -89,6 +89,10 @@ namespace MiniBricks.Tetris {
             return feature;
         }
 
+        public void AddFeatures(IEnumerable<IFeature> collection) {
+            features.AddRange(collection);
+        }
+        
         [CanBeNull]
         public T GetFeature<T>() where T : IFeature {
             return (T)features.FirstOrDefault(x => x is T);
