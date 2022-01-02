@@ -12,14 +12,14 @@ namespace MiniBricks.Controllers {
         private readonly TowerGameDef towerGameDef;
         private readonly PieceFactory pieceFactory;
         private readonly TickProvider tickProvider;
-        private readonly GameScreenFactory gameScreenFactory;
+        private readonly LobbyController lobbyController;
 
         public TrainingGameLauncher(TowerGameDef towerGameDef, PieceFactory pieceFactory, 
-                                    TickProvider tickProvider, GameScreenFactory gameScreenFactory) {
+                                    TickProvider tickProvider, LobbyController lobbyController) {
             this.towerGameDef = towerGameDef;
             this.pieceFactory = pieceFactory;
             this.tickProvider = tickProvider;
-            this.gameScreenFactory = gameScreenFactory;
+            this.lobbyController = lobbyController;
         }
 
         public GameType Type => GameType.Training;
@@ -34,9 +34,15 @@ namespace MiniBricks.Controllers {
             private readonly Map map;
             private readonly TowerGame game;
             private readonly GameScreen gameScreen;
+            private readonly GameOverWatcher watcher;
             
             public TrainingGameRunner(TrainingGameLauncher l) {
                 this.l = l;
+
+                var pauseWindowFactory = new PauseWindowFactory(l.lobbyController);
+                var gameScreenFactory = new GameScreenFactory(pauseWindowFactory);
+                var gameOverWindowFactory = new GameOverWindowFactory(l.lobbyController);
+                
                 var mapPrefab = Resources.Load<Map>("Maps/Map01");
                 
                 input = new KeyboardCommandProvider();
@@ -45,10 +51,12 @@ namespace MiniBricks.Controllers {
             
                 map.Camera.GetComponent<FollowCamera>().Initialize(game, map);
                 
-                gameScreen = l.gameScreenFactory.Create(game);
+                gameScreen = gameScreenFactory.Create(game);
                 gameScreen.SetActive(true);
                 
                 game.Start();
+
+                watcher = new GameOverWatcher(game, gameScreen, gameOverWindowFactory);
                 
                 l.tickProvider.AddTickable(this);
             }
@@ -65,7 +73,34 @@ namespace MiniBricks.Controllers {
                 game.Dispose();
                 l.tickProvider.RemoveTickable(this);
                 GameObject.Destroy(map.gameObject);
+                watcher.Dispose();
+            }
+        }
+
+        private class GameOverWatcher : IDisposable {
+            private readonly TowerGame towerGame;
+            private readonly GameScreen gameScreen;
+            private readonly GameOverWindowFactory gameOverWindowFactory;
+
+            public GameOverWatcher(TowerGame towerGame, GameScreen gameScreen, GameOverWindowFactory gameOverWindowFactory) {
+                this.towerGame = towerGame;
+                this.gameScreen = gameScreen;
+                this.gameOverWindowFactory = gameOverWindowFactory;
+                towerGame.StateChanged += OnGameStateChanged;
+            }
+            
+            public void Dispose() {
+                towerGame.StateChanged -= OnGameStateChanged;
+            }
+
+            private void OnGameStateChanged(TowerGame _) {
+                gameScreen.SetActive(false);
+                var window = gameOverWindowFactory.Create(towerGame);
+                window.AddUser("Player", towerGame.GetNumFalls(), towerGame.GetMaxHeight(), true);
+                window.SetActive(true);
             }
         }
     }
+    
+    
 }

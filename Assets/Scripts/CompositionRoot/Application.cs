@@ -19,15 +19,12 @@ namespace MiniBricks.CompositionRoot {
             var lobbyController = new LobbyController();
 
             var mainScreenFactory = new MainScreenFactory(lobbyController);
-            var pauseScreenFactory = new PauseWindowFactory(lobbyController);
-            var gameScreenFactory = new GameScreenFactory(pauseScreenFactory);
-            
             var tickProvider = gameObject.AddComponent<TickProvider>();
             
-            var trainingGameLauncher = new TrainingGameLauncher(gameDef.TowerGame, pieceFactory, tickProvider, gameScreenFactory);
+            var trainingGameLauncher = new TrainingGameLauncher(gameDef.TowerGame, pieceFactory, tickProvider, lobbyController);
             lobbyController.AddGameLauncher(trainingGameLauncher);
 
-            var battleGameLauncher = new BattleGameLauncher(gameDef.TowerGame, pieceFactory, tickProvider, gameScreenFactory);
+            var battleGameLauncher = new BattleGameLauncher(gameDef.TowerGame, pieceFactory, tickProvider, lobbyController);
             lobbyController.AddGameLauncher(battleGameLauncher);
             
             var mainScreen = mainScreenFactory.Create();

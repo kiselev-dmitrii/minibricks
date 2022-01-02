@@ -68,7 +68,7 @@ namespace MiniBricks.UI {
         #endregion
         
         #region Collection Users
-        public Collection<UserItem> Users = new Collection<UserItem>(false);
+        public Collection<UserItem> Users { get; } = new Collection<UserItem>(false);
         #endregion
         
         private readonly LobbyController lobbyController;
