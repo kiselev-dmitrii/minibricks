@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace MiniBricks.Tetris {
@@ -6,5 +5,9 @@ namespace MiniBricks.Tetris {
         public PieceTrigger[] FallTriggers;
         public Transform PlatformTop;
         public Camera Camera;
+
+        public Vector3 GetPlatformTop() {
+            return PlatformTop.position;
+        }
     }
 }

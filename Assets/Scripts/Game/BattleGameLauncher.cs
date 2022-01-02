@@ -30,39 +30,27 @@ namespace MiniBricks.Controllers {
         
         private class BattleGameRunner : IDisposable, ITickable {
             private readonly BattleGameLauncher l;
-            
-            private readonly Map map1;
-            private readonly GameSimulation game1;
 
+            private readonly ICommandProvider input1;
+            private readonly Map map1;
+            private readonly TowerGame game1;
+
+            private readonly ICommandProvider input2;
             private readonly Map map2;
-            private readonly GameSimulation game2;
+            private readonly TowerGame game2;
             private readonly GameScreen gameScreen;
             
             public BattleGameRunner(BattleGameLauncher l) {
                 this.l = l;
                 var mapPrefab = Resources.Load<Map>("Maps/Map01");
                 
-                var input1 = new KeyboardCommandProvider();
+                input1 = new KeyboardCommandProvider();
                 map1 = Object.Instantiate(mapPrefab);
-                game1 = new GameSimulation();
-                game1.AddFeatures(new IFeature[] {
-                    /*
-                    new InputFeature(game1, input1),
-                    new TetrisFeature(game1, map1, l.towerGameDef, l.pieceFactory),
-                    new EndGameFeature(game1, l.towerGameDef)
-                    */
-                });
+                game1 = new TowerGame(l.towerGameDef, map1, l.pieceFactory);
 
-                var input2 = new RandomCommandProvider(1);
+                input2 = new RandomCommandProvider(1);
                 map2 = Object.Instantiate(mapPrefab, Vector3.right*100, Quaternion.identity);
-                game2 = new GameSimulation();
-                game2.AddFeatures(new IFeature[] {
-                    /*
-                    new InputFeature(game2, input2),
-                    new TetrisFeature(game2, map2, l.towerGameDef, l.pieceFactory),
-                    new EndGameFeature(game2, l.towerGameDef)
-                    */
-                });
+                game2 = new TowerGame(l.towerGameDef, map2, l.pieceFactory);
                 map2.Camera.enabled = false;
                 
                 gameScreen = l.gameScreenFactory.Create(game1);
@@ -75,8 +63,12 @@ namespace MiniBricks.Controllers {
             }
     
             public void Tick() {
+                game1.AddCommand(input1.GetNextCommand());
                 game1.Tick();
+                
+                game2.AddCommand(input2.GetNextCommand());
                 game2.Tick();
+                
                 gameScreen.Update();
             }
             

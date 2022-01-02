@@ -10,26 +10,26 @@ namespace MiniBricks.UI {
             this.lobbyController = lobbyController;
         }
 
-        public PauseWindow Create(GameSimulation game) {
+        public PauseWindow Create(TowerGame game) {
             return new PauseWindow(game, lobbyController);
         }
     }
     
     public class PauseWindow : Window {
-        private readonly GameSimulation game;
+        private readonly TowerGame game;
         private readonly LobbyController lobbyController;
 
-        public PauseWindow(GameSimulation game, LobbyController lobbyController) : base("UI/PauseWindow/PauseWindow") {
+        public PauseWindow(TowerGame game, LobbyController lobbyController) : base("UI/PauseWindow/PauseWindow") {
             this.game = game;
             this.lobbyController = lobbyController;
         }
 
         protected override void OnActivated() {
-            game.IsPaused = true;
+            game.Pause();
         }
 
         protected override void OnDeactivated() {
-            game.IsPaused = false;
+            game.Unpause();
         }
 
         public async void OnQuitButtonClick() {

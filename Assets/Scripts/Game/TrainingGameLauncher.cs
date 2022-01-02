@@ -30,24 +30,20 @@ namespace MiniBricks.Controllers {
         
         private class TrainingGameRunner : IDisposable, ITickable {
             private readonly TrainingGameLauncher l;
-            private readonly Map map1;
-            private readonly GameSimulation game;
+            private readonly ICommandProvider input;
+            private readonly Map map;
+            private readonly TowerGame game;
             private readonly GameScreen gameScreen;
             
             public TrainingGameRunner(TrainingGameLauncher l) {
                 this.l = l;
                 var mapPrefab = Resources.Load<Map>("Maps/Map01");
                 
-                var input = new KeyboardCommandProvider();
-                
-                map1 = Object.Instantiate(mapPrefab);
-                
-                game = new GameSimulation();
-                game.AddFeature(new TetrisFeature(game, map1, l.towerGameDef, l.pieceFactory));
-                game.AddFeature(new InputFeature(game.GetFeature<TetrisFeature>(), input));
-                game.AddFeature(new EndGameFeature(game, l.towerGameDef));
+                input = new KeyboardCommandProvider();
+                map = Object.Instantiate(mapPrefab);
+                game = new TowerGame(l.towerGameDef, map, l.pieceFactory);
             
-                map1.Camera.GetComponent<FollowCamera>().Initialize(game.GetFeature<TetrisFeature>());
+                map.Camera.GetComponent<FollowCamera>().Initialize(game, map);
                 
                 gameScreen = l.gameScreenFactory.Create(game);
                 gameScreen.SetActive(true);
@@ -58,7 +54,9 @@ namespace MiniBricks.Controllers {
             }
     
             public void Tick() {
+                game.AddCommand(input.GetNextCommand());
                 game.Tick();
+                
                 gameScreen.Update();
             }
             
@@ -66,7 +64,7 @@ namespace MiniBricks.Controllers {
                 gameScreen.Destroy();
                 game.Dispose();
                 l.tickProvider.RemoveTickable(this);
-                GameObject.Destroy(map1.gameObject);
+                GameObject.Destroy(map.gameObject);
             }
         }
     }

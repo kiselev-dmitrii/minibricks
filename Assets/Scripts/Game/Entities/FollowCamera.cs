@@ -7,11 +7,13 @@ namespace MiniBricks.Tetris {
         [SerializeField]
         private float factor = 30;
 
-        private TetrisFeature tetrisFeature;
+        private TowerGame towerGame;
+        private Map map;
         private Transform cachedTransform;
         
-        public void Initialize(TetrisFeature tetrisFeature) {
-            this.tetrisFeature = tetrisFeature;
+        public void Initialize(TowerGame towerGame, Map map) {
+            this.towerGame = towerGame;
+            this.map = map;
             cachedTransform = transform;
         }
 
@@ -21,8 +23,8 @@ namespace MiniBricks.Tetris {
         }
 
         private Vector3 CalculateTowerTop() {
-            var result = tetrisFeature.GetPlatformTop();
-            var pieces = tetrisFeature.PlacedPieces;
+            var result = map.GetPlatformTop();
+            var pieces = towerGame.GetPlacedPieces();
             
             if (pieces.Count == 0) {
                 return result;
