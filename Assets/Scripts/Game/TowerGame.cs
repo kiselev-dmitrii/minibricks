@@ -24,7 +24,7 @@ namespace MiniBricks.Tetris {
         /// <summary>
         /// Required Height
         /// </summary>
-        public float RequiredHeight;
+        public int RequiredHeight;
 
     }
     
@@ -33,7 +33,7 @@ namespace MiniBricks.Tetris {
     }
 
     public enum GameResult {
-        Win,
+        Victory,
         Defeat
     }
 
@@ -90,8 +90,8 @@ namespace MiniBricks.Tetris {
             return def.NumLives - numFalls;
         }
 
-        public float GetMaxHeight() {
-            return maxHeight;
+        public int GetMaxHeight() {
+            return Mathf.CeilToInt(maxHeight);
         }
 
         public int GetNumFalls() {
@@ -174,7 +174,7 @@ namespace MiniBricks.Tetris {
         
         private void UpdateGameState() {
             if (maxHeight >= def.RequiredHeight) {
-                FinishGame(GameResult.Win);
+                FinishGame(GameResult.Victory);
                 return;
             }
             

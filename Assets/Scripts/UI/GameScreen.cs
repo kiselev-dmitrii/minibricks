@@ -43,7 +43,7 @@ namespace MiniBricks.UI {
 
         public void Update() {
             NumLives = game.GetNumLives();
-            Height = Mathf.FloorToInt(game.GetMaxHeight());
+            Height = game.GetMaxHeight();
         }
         
         public void OnPauseButtonClick() {
