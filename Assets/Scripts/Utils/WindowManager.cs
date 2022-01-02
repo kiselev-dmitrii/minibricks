@@ -54,6 +54,9 @@ namespace MiniBricks.Utils {
         }
         
         public void Destroy() {
+            if (IsActive()) {
+                OnDeactivated();
+            }
             WindowManager.DestroyView(this);
             View = null;
         }
@@ -62,8 +65,18 @@ namespace MiniBricks.Utils {
             return View.activeSelf;
         }
 
-        public void SetActive(bool isActive) {
-            View.SetActive(isActive);
+        public void SetActive(bool value) {
+            if (value == IsActive()) {
+                return;
+            }
+            
+            View.SetActive(value);
+            
+            if (value) {
+                OnActivated();
+            } else {
+                OnDeactivated();
+            }
         }
 
         public void Activate() {
@@ -73,5 +86,8 @@ namespace MiniBricks.Utils {
         public void Deactivate() {
             SetActive(false);
         }
+        
+        protected virtual void OnActivated() {}
+        protected virtual void OnDeactivated() {}
     }
 }

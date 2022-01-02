@@ -42,12 +42,11 @@ namespace MiniBricks.Controllers {
                 
                 map1 = Object.Instantiate(mapPrefab);
                 game = new GameSimulation();
-                game.AddFeature(new PhysicsFeature());
-                game.AddFeature(new TetrisFeature(game, map1, l.towerGameDef, l.pieceFactory));
                 game.AddFeature(new InputFeature(game, input));
+                game.AddFeature(new TetrisFeature(game, map1, l.towerGameDef, l.pieceFactory));
                 game.AddFeature(new EndGameFeature(game, l.towerGameDef));
             
-                gameScreen = l.gameScreenFactory.Create(game.GetFeature<EndGameFeature>());
+                gameScreen = l.gameScreenFactory.Create(game);
                 gameScreen.SetActive(true);
                 
                 game.Start();

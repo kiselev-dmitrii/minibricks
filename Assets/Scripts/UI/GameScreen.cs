@@ -11,14 +11,12 @@ namespace MiniBricks.UI {
             this.pauseWindowFactory = pauseWindowFactory;
         }
 
-        public GameScreen Create(EndGameFeature endGameFeature) {
-            return new GameScreen(endGameFeature, pauseWindowFactory);
+        public GameScreen Create(GameSimulation gameSimulation) {
+            return new GameScreen(gameSimulation, pauseWindowFactory);
         }
     }
     
-    public class GameScreen : Window {
-        private readonly PauseWindowFactory pauseWindowFactory;
-        
+    public class GameScreen : Window {       
         #region Property NumLives
         public Property<int> NumLivesProperty { get; } = new Property<int>();
         public int NumLives {
@@ -34,11 +32,14 @@ namespace MiniBricks.UI {
             set => HeightProperty.SetValue(value);
         }
         #endregion
-
+        
+        private readonly GameSimulation gameSimulation;
+        private readonly PauseWindowFactory pauseWindowFactory;
         private readonly EndGameFeature endGameFeature;
         
-        public GameScreen(EndGameFeature endGameFeature, PauseWindowFactory pauseWindowFactory) : base("UI/GameScreen/GameScreen") {
-            this.endGameFeature = endGameFeature;
+        public GameScreen(GameSimulation gameSimulation, PauseWindowFactory pauseWindowFactory) : base("UI/GameScreen/GameScreen") {
+            this.endGameFeature = gameSimulation.GetFeature<EndGameFeature>();
+            this.gameSimulation = gameSimulation;
             this.pauseWindowFactory = pauseWindowFactory;
         }
 
@@ -48,7 +49,7 @@ namespace MiniBricks.UI {
         }
         
         public void OnPauseButtonClick() {
-            var window = pauseWindowFactory.Create();
+            var window = pauseWindowFactory.Create(gameSimulation);
             window.SetActive(true);
         }
     }

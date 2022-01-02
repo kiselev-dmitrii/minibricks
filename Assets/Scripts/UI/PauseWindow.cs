@@ -1,4 +1,5 @@
 using MiniBricks.Controllers;
+using MiniBricks.Tetris;
 using MiniBricks.Utils;
 
 namespace MiniBricks.UI {
@@ -9,16 +10,26 @@ namespace MiniBricks.UI {
             this.lobbyController = lobbyController;
         }
 
-        public PauseWindow Create() {
-            return new PauseWindow(lobbyController);
+        public PauseWindow Create(GameSimulation game) {
+            return new PauseWindow(game, lobbyController);
         }
     }
     
     public class PauseWindow : Window {
+        private readonly GameSimulation game;
         private readonly LobbyController lobbyController;
 
-        public PauseWindow(LobbyController lobbyController) : base("UI/PauseWindow/PauseWindow") {
+        public PauseWindow(GameSimulation game, LobbyController lobbyController) : base("UI/PauseWindow/PauseWindow") {
+            this.game = game;
             this.lobbyController = lobbyController;
+        }
+
+        protected override void OnActivated() {
+            game.IsPaused = true;
+        }
+
+        protected override void OnDeactivated() {
+            game.IsPaused = false;
         }
 
         public async void OnQuitButtonClick() {
