@@ -51,10 +51,10 @@ namespace MiniBricks.Controllers {
                 game1 = new TowerGame(l.towerGameDef, map1, l.pieceFactory);
                 map1.Camera.GetComponent<FollowCamera>().Initialize(game1, map1);
 
-                input2 = new RandomCommandProvider(1);
+                input2 = new RandomCommandProvider(0.1f);
                 map2 = Object.Instantiate(mapPrefab, Vector3.right*100, Quaternion.identity);
                 game2 = new TowerGame(l.towerGameDef, map2, l.pieceFactory);
-                map2.Camera.gameObject.SetActive(false);
+                map2.Camera.GetComponent<FollowCamera>().Initialize(game2, map2);
                 
                 gameScreen = new GameScreen();
                 gameScreen.AddComponent(new PlayerStateGameScreenComponent(game1, pauseWindowFactory));

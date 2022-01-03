@@ -8,9 +8,7 @@ namespace MiniBricks.Game.CommandProviders {
         private static readonly ICommand[] commands = {
             new LeftCommand(),
             new RightCommand(),
-            new RotateCommand(),
-            new StartAccelerateCommand(),
-            new StopAccelerateCommand()
+            new RotateCommand()
         };
         
         private readonly float delay;
