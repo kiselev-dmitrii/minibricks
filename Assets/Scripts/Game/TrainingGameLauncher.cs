@@ -40,7 +40,6 @@ namespace MiniBricks.Controllers {
                 this.l = l;
 
                 var pauseWindowFactory = new PauseWindowFactory(l.lobbyController);
-                var gameScreenFactory = new GameScreenFactory(pauseWindowFactory);
                 var gameOverWindowFactory = new GameOverWindowFactory(l.lobbyController);
                 
                 var mapPrefab = Resources.Load<Map>("Maps/Map01");
@@ -51,7 +50,8 @@ namespace MiniBricks.Controllers {
             
                 map.Camera.GetComponent<FollowCamera>().Initialize(game, map);
                 
-                gameScreen = gameScreenFactory.Create(game);
+                gameScreen = new GameScreen();
+                gameScreen.AddComponent(new PlayerStateGameScreenComponent(game, pauseWindowFactory));
                 gameScreen.SetActive(true);
                 
                 game.Start();
@@ -64,8 +64,6 @@ namespace MiniBricks.Controllers {
             public void Tick() {
                 game.AddCommand(input.GetNextCommand());
                 game.Tick();
-                
-                gameScreen.Update();
             }
             
             public void Dispose() {

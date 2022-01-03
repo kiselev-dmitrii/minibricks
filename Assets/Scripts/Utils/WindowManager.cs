@@ -89,5 +89,6 @@ namespace MiniBricks.Utils {
         
         protected virtual void OnActivated() {}
         protected virtual void OnDeactivated() {}
+        protected virtual void OnDestroy() {}
     }
 }

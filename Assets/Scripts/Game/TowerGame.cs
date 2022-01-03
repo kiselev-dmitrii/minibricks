@@ -84,7 +84,14 @@ namespace MiniBricks.Tetris {
         public event Action<Piece> PieceSpawned; 
         public event Action<Piece> PieceTouched;
         public event Action<Piece> PieceFalling;
+        public event Action<TowerGame> HeightChanged;
+        public event Action<TowerGame> NumLivesChanged;
         public event Action<TowerGame> StateChanged;
+        public event Action<ICommand> CommandExecuted;
+
+        public Map GetMap() {
+            return map;
+        }
         
         public int GetNumLives() {
             return def.NumLives - numFalls;
@@ -166,6 +173,7 @@ namespace MiniBricks.Tetris {
             if (currentPiece != null) {
                 foreach (var command in commands) {
                     command.Execute(currentPiece);
+                    CommandExecuted?.Invoke(command);
                 }
             }
 
@@ -229,7 +237,11 @@ namespace MiniBricks.Tetris {
                     heightInWorld = point.y;
                 }
             }
-            maxHeight = heightInWorld - map.GetPlatformTop().y;
+            var newMaxHeight = heightInWorld - map.GetPlatformTop().y;
+            if (newMaxHeight > maxHeight) {
+                maxHeight = newMaxHeight;
+                HeightChanged?.Invoke(this);
+            }
         }
         
         private void OnFallTriggerFired(PieceTrigger trigger, Piece piece) {
@@ -245,6 +257,8 @@ namespace MiniBricks.Tetris {
 
             numFalls += 1;
             piece.Destroy();
+            
+            NumLivesChanged?.Invoke(this);
         }
     }
 }

@@ -1,54 +1,33 @@
-using MiniBricks.Tetris;
+using System;
+using KiselevDmitry.NData.Bindings;
 using MiniBricks.Utils;
 using NData;
-using UnityEngine;
 
 namespace MiniBricks.UI {
-    public class GameScreenFactory {
-        private readonly PauseWindowFactory pauseWindowFactory;
+    public abstract class GameScreenComponent : Context, IPathContext, IDisposable {
+        public abstract String Path { get; }
 
-        public GameScreenFactory(PauseWindowFactory pauseWindowFactory) {
-            this.pauseWindowFactory = pauseWindowFactory;
-        }
-
-        public GameScreen Create(TowerGame game) {
-            return new GameScreen(game, pauseWindowFactory);
-        }
+        public abstract void Dispose();
     }
     
-    public class GameScreen : Window {       
-        #region Property NumLives
-        public Property<int> NumLivesProperty { get; } = new Property<int>();
-        public int NumLives {
-            get => NumLivesProperty.GetValue();
-            set => NumLivesProperty.SetValue(value);
+    public class GameScreen : Window {
+        #region Collection Components
+        public Collection<GameScreenComponent> Components { get; } = new Collection<GameScreenComponent>(false);
+        #endregion        
+        
+        public GameScreen() : base("UI/GameScreen/GameScreen") {
         }
-        #endregion
         
-        #region Property Height
-        public Property<int> HeightProperty { get; } = new Property<int>();
-        public int Height {
-            get => HeightProperty.GetValue();
-            set => HeightProperty.SetValue(value);
-        }
-        #endregion
-        
-        private readonly TowerGame game;
-        private readonly PauseWindowFactory pauseWindowFactory;
-        
-        public GameScreen(TowerGame game, PauseWindowFactory pauseWindowFactory) : base("UI/GameScreen/GameScreen") {
-            this.game = game;
-            this.pauseWindowFactory = pauseWindowFactory;
+        protected override void OnDestroy() {
+            foreach (var component in Components) {
+                component.Dispose();
+            }
         }
 
-        public void Update() {
-            NumLives = game.GetNumLives();
-            Height = game.GetMaxHeight();
+        public void AddComponent(GameScreenComponent component) {
+            Components.Add(component);
         }
-        
-        public void OnPauseButtonClick() {
-            var window = pauseWindowFactory.Create(game);
-            window.SetActive(true);
-        }
+
+
     }
 }

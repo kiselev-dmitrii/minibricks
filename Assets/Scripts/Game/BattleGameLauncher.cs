@@ -45,7 +45,6 @@ namespace MiniBricks.Controllers {
                 var mapPrefab = Resources.Load<Map>("Maps/Map01");
                 
                 var pauseWindowFactory = new PauseWindowFactory(l.lobbyController);
-                var gameScreenFactory = new GameScreenFactory(pauseWindowFactory);
                 
                 input1 = new KeyboardCommandProvider();
                 map1 = Object.Instantiate(mapPrefab);
@@ -57,7 +56,9 @@ namespace MiniBricks.Controllers {
                 game2 = new TowerGame(l.towerGameDef, map2, l.pieceFactory);
                 map2.Camera.gameObject.SetActive(false);
                 
-                gameScreen = gameScreenFactory.Create(game1);
+                gameScreen = new GameScreen();
+                gameScreen.AddComponent(new PlayerStateGameScreenComponent(game1, pauseWindowFactory));
+                gameScreen.AddComponent(new EnemyStateGameScreenComponent(game2));
                 gameScreen.SetActive(true);
                 
                 game1.Start();
@@ -72,8 +73,6 @@ namespace MiniBricks.Controllers {
                 
                 game2.AddCommand(input2.GetNextCommand());
                 game2.Tick();
-                
-                gameScreen.Update();
             }
             
             public void Dispose() {
