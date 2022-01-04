@@ -53,6 +53,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9f3fa151bbc4046bf9c7fd045893e289, type: 3}
   - {fileID: 21300000, guid: ebd15443abf7f41c5ab35674558747b3, type: 3}
   - {fileID: 21300000, guid: 794fe7a8b444c4d0983e32c0d139886a, type: 3}
+  - {fileID: 21300000, guid: efa2c029613864099a53526fc1588e8b, type: 3}
   - {fileID: 21300000, guid: ffc4f48967e5649a7aca3e468b18e789, type: 3}
   - {fileID: 21300000, guid: b1616f8ab0d8c41ce835eb258804495c, type: 3}
   - {fileID: 21300000, guid: 5698f21ef33a541a3b536a88edd4d5c5, type: 3}
@@ -63,6 +64,7 @@ SpriteAtlas:
   - Piece5
   - Piece2
   - Piece3
+  - Rect
   - Piece1
   - Sky
   - FinishLine

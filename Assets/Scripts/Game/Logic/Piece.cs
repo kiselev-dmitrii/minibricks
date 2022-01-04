@@ -41,8 +41,8 @@ namespace MiniBricks.Game {
         private Transform cachedTransform;
         
         public event Action<Piece, Collision2D> Touched;
-        public PieceState State { get; private set; }
         public event Action<Piece> StateChanged;
+        public PieceState State { get; private set; }
         public bool IsAccelerated { get; private set; }
         
         public void Initialize(PieceDef def) {
@@ -73,7 +73,7 @@ namespace MiniBricks.Game {
         
         public void Rotate() {
             EnsureIsDescending();
-            rb.rotation += 90;
+            rb.rotation -= 90;
         }
 
         public void SetAccelerated(bool isEnabled) {
@@ -85,6 +85,10 @@ namespace MiniBricks.Game {
 
         public Vector3 GetPosition() {
             return cachedTransform.position;
+        }
+
+        public Vector2 GetSize() {
+            return polygonCollider.bounds.size;
         }
         
         public void Destroy() {
