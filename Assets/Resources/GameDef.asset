@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MultiplayerGame:
     Tower:
-      SpawnHeight: 8
+      SpawnHeight: 12
       Pieces:
       - {fileID: 6417856810676443100, guid: de16f544081b64779ab5850b8de62099, type: 3}
       - {fileID: 7233542110710881965, guid: f21007e1cf07943bb9d400dee1414a2c, type: 3}

@@ -80,6 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5912139742799875088}
   - component: {fileID: 5912139742799875089}
+  - component: {fileID: 4890040068030168025}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -115,3 +116,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger: {fileID: 4819172453706591336}
+--- !u!114 &4890040068030168025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5912139742799875119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f8a33c88c640e7802dc6450c2a1e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
+  tower: {fileID: 5912139742799875089}
