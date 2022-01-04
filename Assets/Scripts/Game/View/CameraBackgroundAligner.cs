@@ -8,7 +8,7 @@ namespace MiniBricks.Tetris {
         [SerializeField]
         private new Camera camera;
         
-        public void OnEnable() {
+        public void Update() {
             var height = camera.orthographicSize;
             float width = camera.aspect * height;
             background.localScale = new Vector3(2*width, 2*height, 1);

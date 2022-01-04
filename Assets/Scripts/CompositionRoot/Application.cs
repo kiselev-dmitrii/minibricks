@@ -14,6 +14,8 @@ namespace MiniBricks.CompositionRoot {
         private Disposer disposer;
         
         private void Awake() {
+            UnityEngine.Application.targetFrameRate = 60;
+            
             disposer = new Disposer();
             
             var windowManager = WindowManager.Create("Settings/UI");

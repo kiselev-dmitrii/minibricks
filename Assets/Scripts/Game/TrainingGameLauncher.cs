@@ -1,13 +1,9 @@
 using System;
-using MiniBricks.Game;
 using MiniBricks.Game.CommandProviders;
 using MiniBricks.Game.Entities;
 using MiniBricks.Tetris;
 using MiniBricks.UI;
 using MiniBricks.Utils;
-using UnityEditor.iOS;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace MiniBricks.Controllers {
     public class TrainingGameLauncher : IGameLauncher {

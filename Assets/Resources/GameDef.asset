@@ -27,4 +27,4 @@ MonoBehaviour:
   Piece:
     MoveStep: 0.5
     FallSpeed: 3
-    AccelerationSpeed: 8
+    AccelerationSpeed: 12
