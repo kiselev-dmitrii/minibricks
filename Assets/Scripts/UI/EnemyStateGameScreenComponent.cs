@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using MiniBricks.Controllers;
 using MiniBricks.Game.Commands;
 using MiniBricks.Game.Entities;
-using MiniBricks.Tetris;
 using MiniBricks.Utils;
 using NData;
 using UnityEngine;
@@ -11,14 +10,6 @@ using UnityEngine;
 namespace MiniBricks.UI {
     public class EnemyStateGameScreenComponent : GameScreenComponent {
         public override string Path => "UI/GameScreen/EnemyStateGameScreenComponent";        
-        
-        #region Property LastMoves
-        public Property<String> LastMovesProperty { get; } = new Property<String>();
-        public String LastMoves {
-            get => LastMovesProperty.GetValue();
-            set => LastMovesProperty.SetValue(value);
-        }
-        #endregion
         
         #region Property Height
         public Property<int> HeightProperty { get; } = new Property<int>();
@@ -44,8 +35,17 @@ namespace MiniBricks.UI {
         }
         #endregion
 
+        #region Property MoveHistory
+        public Property<String> MoveHistoryProperty { get; } = new Property<String>();
+        public String MoveHistory {
+            get => MoveHistoryProperty.GetValue();
+            set => MoveHistoryProperty.SetValue(value);
+        }
+        #endregion
+        
         private readonly MultiplayerGame game;
         private readonly Tower tower;
+        private const int maxMoveHistoryLength = 6;
 
         private static readonly Dictionary<Type, String> commandRepresentations = new Dictionary<Type, String>() {
             { typeof(LeftCommand), "→" },
@@ -59,6 +59,7 @@ namespace MiniBricks.UI {
             this.tower = tower;
         
             CameraView = cameraOutput;
+            MoveHistory = String.Empty;
             
             OnTowerHeightChanged(tower);
             OnTowerNumLivesChanged(tower);
@@ -84,9 +85,10 @@ namespace MiniBricks.UI {
                 return;
             }
 
-            LastMoves += representation;
-            if (LastMoves.Length > 6) {
-                LastMoves = LastMoves.Remove(0);
+            MoveHistory = MoveHistory.Insert(0, representation);
+            int moveHistoryLength = MoveHistory.Length;
+            if (moveHistoryLength > maxMoveHistoryLength) {
+                MoveHistory = MoveHistory.Remove(moveHistoryLength-1, 1);
             }
         }
         
