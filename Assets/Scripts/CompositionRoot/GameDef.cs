@@ -1,11 +1,11 @@
 using MiniBricks.Game;
-using MiniBricks.Tetris;
+using MiniBricks.Game.Entities;
 using UnityEngine;
 
 namespace MiniBricks {
     [CreateAssetMenu(menuName = "Game/GameDef")]
     public class GameDef : ScriptableObject {
-        public TowerGameDef TowerGame;
+        public MultiplayerGameDef MultiplayerGame;
         public PieceDef Piece;
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using MiniBricks.Controllers;
 using MiniBricks.Game.Commands;
+using MiniBricks.Game.Entities;
 using MiniBricks.Tetris;
 using MiniBricks.Utils;
 using NData;
@@ -41,10 +43,9 @@ namespace MiniBricks.UI {
             set => CameraViewProperty.SetValue(value);
         }
         #endregion
-        
-        private readonly TowerGame tower;
-        private readonly Map map;
-        private readonly RenderTexture renderTexture;
+
+        private readonly MultiplayerGame game;
+        private readonly Tower tower;
 
         private static readonly Dictionary<Type, String> commandRepresentations = new Dictionary<Type, String>() {
             { typeof(LeftCommand), "→" },
@@ -53,32 +54,31 @@ namespace MiniBricks.UI {
             { typeof(StartAccelerateCommand), "↓"}
         };
 
-        public EnemyStateGameScreenComponent(TowerGame tower) {
+        public EnemyStateGameScreenComponent(MultiplayerGame game, Tower tower, RenderTexture cameraOutput) {
+            this.game = game;
             this.tower = tower;
-            tower.CommandExecuted += OnTowerCommandExecuted;
-            tower.HeightChanged += OnHeightChanged;
-            tower.NumLivesChanged += OnNumLivesChanged;
-
-            map = tower.GetMap();
-            renderTexture = new RenderTexture(270, 480, 0, RenderTextureFormat.ARGB32);
-            renderTexture.Create();
-            map.Camera.targetTexture = renderTexture;
-            CameraView = renderTexture;
+        
+            CameraView = cameraOutput;
             
-            OnHeightChanged(tower);
-            OnNumLivesChanged(tower);
+            OnTowerHeightChanged(tower);
+            OnTowerNumLivesChanged(tower);
+            
+            game.CommandExecuted += OnGameCommandExecuted;
+            tower.HeightChanged += OnTowerHeightChanged;
+            tower.NumLivesChanged += OnTowerNumLivesChanged;
         }
 
         public override void Dispose() {
-            tower.CommandExecuted -= OnTowerCommandExecuted;
-            tower.HeightChanged -= OnHeightChanged;
-            tower.NumLivesChanged -= OnNumLivesChanged;
-
-            map.Camera.targetTexture = null;
-            renderTexture.Release();
+            game.CommandExecuted -= OnGameCommandExecuted;
+            tower.HeightChanged -= OnTowerHeightChanged;
+            tower.NumLivesChanged -= OnTowerNumLivesChanged;
         }
         
-        private void OnTowerCommandExecuted(ICommand command) {
+        private void OnGameCommandExecuted(ICommand command) {
+            if (command.TowerId != tower.GetId()) {
+                return;
+            }
+            
             var representation = commandRepresentations.Get(command.GetType());
             if (representation == null) {
                 return;
@@ -90,11 +90,11 @@ namespace MiniBricks.UI {
             }
         }
         
-        private void OnHeightChanged(TowerGame _) {
+        private void OnTowerHeightChanged(Tower _) {
             Height = tower.GetMaxHeight();
         }
         
-        private void OnNumLivesChanged(TowerGame _) {
+        private void OnTowerNumLivesChanged(Tower _) {
             NumLives = tower.GetNumLives();
         }
     }

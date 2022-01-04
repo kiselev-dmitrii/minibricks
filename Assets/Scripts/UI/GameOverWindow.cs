@@ -1,6 +1,6 @@
 using System;
 using MiniBricks.Controllers;
-using MiniBricks.Tetris;
+using MiniBricks.Game.Entities;
 using MiniBricks.Utils;
 using NData;
 
@@ -12,11 +12,11 @@ namespace MiniBricks.UI {
             this.lobbyController = lobbyController;
         }
         
-        public GameOverWindow Create(TowerGame game) {
-            return new GameOverWindow(game, lobbyController);
+        public GameOverWindow Create(GameResult gameResult) {
+            return new GameOverWindow(gameResult, lobbyController);
         }
     }
-
+    
     public class UserItem : Context {
         #region Property Name
         public Property<String> NameProperty { get; } = new Property<String>();
@@ -73,9 +73,9 @@ namespace MiniBricks.UI {
         
         private readonly LobbyController lobbyController;
         
-        public GameOverWindow(TowerGame game, LobbyController lobbyController) : base("UI/GameOverWindow/GameOverWindow") {
+        public GameOverWindow(GameResult result, LobbyController lobbyController) : base("UI/GameOverWindow/GameOverWindow") {
             this.lobbyController = lobbyController;
-            IsVictory = game.GetResult() == GameResult.Victory;
+            IsVictory = result == GameResult.Victory;
         }
 
         public void AddUser(String name, int falls, int height, bool isPlayer) {

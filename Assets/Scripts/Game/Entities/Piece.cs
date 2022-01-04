@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using MiniBricks.Controllers;
 using MiniBricks.Tetris;
 using UnityEngine;
 
 namespace MiniBricks.Game {
-    public class PieceFactory {
+    public class PieceFactory : IPieceFactory {
         private readonly PieceDef pieceDef;
 
         public PieceFactory(PieceDef pieceDef) {

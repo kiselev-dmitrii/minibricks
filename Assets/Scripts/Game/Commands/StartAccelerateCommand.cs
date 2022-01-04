@@ -1,9 +1,16 @@
-using MiniBricks.Tetris;
+using MiniBricks.Controllers;
+using MiniBricks.Game.Entities;
 
 namespace MiniBricks.Game.Commands {
     public class StartAccelerateCommand : ICommand {
-        public void Execute(Piece piece) {
-            piece.SetAccelerated(true);
+        public StartAccelerateCommand(int towerId) {
+            TowerId = towerId;
+        }
+        
+        public int TowerId { get; }
+        
+        public void Execute(Tower tower) {
+            tower.GetCurrentPiece()?.SetAccelerated(true);
         }
     }
 }

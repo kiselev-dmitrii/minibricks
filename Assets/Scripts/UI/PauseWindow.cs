@@ -1,35 +1,37 @@
 using MiniBricks.Controllers;
-using MiniBricks.Tetris;
+using MiniBricks.Game.Entities;
 using MiniBricks.Utils;
 
 namespace MiniBricks.UI {
     public class PauseWindowFactory {
         private readonly LobbyController lobbyController;
+        private readonly MultiplayerGame multiplayerGame;
 
-        public PauseWindowFactory(LobbyController lobbyController) {
+        public PauseWindowFactory(LobbyController lobbyController, MultiplayerGame multiplayerGame) {
             this.lobbyController = lobbyController;
+            this.multiplayerGame = multiplayerGame;
         }
 
-        public PauseWindow Create(TowerGame game) {
-            return new PauseWindow(game, lobbyController);
+        public PauseWindow Create() {
+            return new PauseWindow(multiplayerGame, lobbyController);
         }
     }
     
     public class PauseWindow : Window {
-        private readonly TowerGame game;
+        private readonly MultiplayerGame multiplayerGame;
         private readonly LobbyController lobbyController;
 
-        public PauseWindow(TowerGame game, LobbyController lobbyController) : base("UI/PauseWindow/PauseWindow") {
-            this.game = game;
+        public PauseWindow(MultiplayerGame multiplayerGame, LobbyController lobbyController) : base("UI/PauseWindow/PauseWindow") {
+            this.multiplayerGame = multiplayerGame;
             this.lobbyController = lobbyController;
         }
 
         protected override void OnActivated() {
-            game.Pause();
+            multiplayerGame.Pause();
         }
 
         protected override void OnDeactivated() {
-            game.Unpause();
+            multiplayerGame.Unpause();
         }
 
         public async void OnQuitButtonClick() {

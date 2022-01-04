@@ -1,4 +1,4 @@
-using MiniBricks.Tetris;
+using MiniBricks.Controllers;
 using NData;
 
 namespace MiniBricks.UI {
@@ -21,10 +21,10 @@ namespace MiniBricks.UI {
         }
         #endregion
         
-        private readonly TowerGame tower;
+        private readonly Tower tower;
         private readonly PauseWindowFactory pauseWindowFactory;
         
-        public PlayerStateGameScreenComponent(TowerGame tower, PauseWindowFactory pauseWindowFactory) {
+        public PlayerStateGameScreenComponent(Tower tower, PauseWindowFactory pauseWindowFactory) {
             this.tower = tower;
             this.pauseWindowFactory = pauseWindowFactory;
 
@@ -42,15 +42,15 @@ namespace MiniBricks.UI {
 
         #region Handlers
         public void OnPauseButtonClick() {
-            var window = pauseWindowFactory.Create(tower);
+            var window = pauseWindowFactory.Create();
             window.SetActive(true);
         }
         
-        private void OnTowerHeightChanged(TowerGame _) {
+        private void OnTowerHeightChanged(Tower _) {
             Height = tower.GetMaxHeight();
         }
 
-        private void OnNumLivesChanged(TowerGame _) {
+        private void OnNumLivesChanged(Tower _) {
             NumLives = tower.GetNumLives();
         }
         #endregion
