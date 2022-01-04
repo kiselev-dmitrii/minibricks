@@ -48,12 +48,11 @@ namespace MiniBricks.Controllers {
                 playerCamera = GameObjectUtils.Instantiate<CameraView>("Entities/Camera", game.Transform);
                 playerCamera.SetTarget(player);
                 playerInput = new KeyboardCommandProvider(player.GetId());
+                player.GetComponent<TowerView>().Initialize(game);
 
                 var pauseWindowFactory = new PauseWindowFactory(l.lobbyController, game);
                 var gameOverWindowFactory = new GameOverWindowFactory(l.lobbyController);
 
-               
-                
                 gameScreen = new GameScreen();
                 gameScreen.AddComponent(new PlayerStateGameScreenComponent(player, pauseWindowFactory));
                 gameScreen.SetActive(true);

@@ -53,6 +53,7 @@ namespace MiniBricks.Controllers {
                 playerCamera = GameObjectUtils.Instantiate<CameraView>("Entities/Camera", game.Transform);
                 playerCamera.SetTarget(player);
                 playerInput = new KeyboardCommandProvider(player.GetId());
+                player.GetComponent<TowerView>().Initialize(game);
                 
                 var enemy = game.CreateTower();
                 enemy.SetPlatform("Entities/Platforms/Platform2");
@@ -60,6 +61,7 @@ namespace MiniBricks.Controllers {
                 enemyCamera.SetTarget(enemy);
                 enemyCamera.SetRenderTextureOutput(270, 480);
                 enemyInput = new RandomCommandProvider(enemy.GetId());
+                enemy.GetComponent<TowerView>().Initialize(game);
                 
                 var pauseWindowFactory = new PauseWindowFactory(l.lobbyController, game);
                 var gameOverWindowFactory = new GameOverWindowFactory(l.lobbyController);

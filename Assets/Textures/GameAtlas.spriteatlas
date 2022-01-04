@@ -39,7 +39,7 @@ SpriteAtlas:
       blockOffset: 1
       allowAlphaSplitting: 0
       enableRotation: 1
-      enableTightPacking: 1
+      enableTightPacking: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
@@ -55,6 +55,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 794fe7a8b444c4d0983e32c0d139886a, type: 3}
   - {fileID: 21300000, guid: ffc4f48967e5649a7aca3e468b18e789, type: 3}
   - {fileID: 21300000, guid: b1616f8ab0d8c41ce835eb258804495c, type: 3}
+  - {fileID: 21300000, guid: 5698f21ef33a541a3b536a88edd4d5c5, type: 3}
   - {fileID: 21300000, guid: 4bfd304e6a32545019cd8f9d9512b8cb, type: 3}
   - {fileID: 21300000, guid: 0746218fdf1cc4b38a3f1efc969043a5, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -64,6 +65,7 @@ SpriteAtlas:
   - Piece3
   - Piece1
   - Sky
+  - FinishLine
   - Platform2
   - Piece4
   m_RenderDataMap: {}

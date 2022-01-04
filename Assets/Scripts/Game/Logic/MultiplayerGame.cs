@@ -126,6 +126,10 @@ namespace MiniBricks.Game.Entities {
             return towerResults;
         }
 
+        public int GetTargetHeight() {
+            return def.RequiredHeight;
+        }
+        
         private void UpdateTowerStates() {
             for (var i = 0; i < activeTowers.Count; i++) {
                 var tower = activeTowers[i];

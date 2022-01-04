@@ -71,6 +71,10 @@ namespace MiniBricks.Controllers {
             var prefab = Resources.Load<Platform>(platformPath);
             currentPlatform = GameObject.Instantiate(prefab, transform);
         }
+
+        public Platform GetPlatform() {
+            return currentPlatform;
+        }
         
         /// <summary>
         /// Returns approximate top of tower in world space
