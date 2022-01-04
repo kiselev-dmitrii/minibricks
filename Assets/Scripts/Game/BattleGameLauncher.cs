@@ -52,7 +52,10 @@ namespace MiniBricks.Controllers {
                 player.SetPlatform("Entities/Platforms/Platform1");
                 playerCamera = GameObjectUtils.Instantiate<CameraView>("Entities/Camera", game.Transform);
                 playerCamera.SetTarget(player);
-                playerInput = new KeyboardCommandProvider(player.GetId());
+                playerInput = new AnyCommandProvider(new ICommandProvider[] {
+                    game.Transform.gameObject.AddComponent<MouseCommandProvider>().Initialize(player.GetId(), playerCamera),
+                    new KeyboardCommandProvider(player.GetId())
+                });
                 player.GetComponent<TowerView>().Initialize(game);
                 
                 var enemy = game.CreateTower();

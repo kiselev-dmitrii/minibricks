@@ -69,6 +69,12 @@ namespace MiniBricks.Tetris {
             camera.targetTexture = rt;
         }
 
+        public float GetPixelsPerUnit() {
+            var heightInPixels = Screen.height;
+            var heightInUnits = camera.orthographicSize * 2;
+            return heightInPixels / heightInUnits;
+        }
+        
         public RenderTexture GetRenderTexture() {
             return rt;
         }
