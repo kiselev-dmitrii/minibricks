@@ -6,9 +6,7 @@ using MiniBricks.Utils;
 namespace MiniBricks.Controllers {
     public enum GameState {
         Menu,
-        Starting,
-        InGame,
-        Leaving
+        InGame
     }
 
     public enum GameType {
@@ -37,36 +35,22 @@ namespace MiniBricks.Controllers {
             launchers.Add(launcher.Type, launcher);
         }
         
-        public Task StartGame(GameType gameType) {
+        public void StartGame(GameType gameType) {
             var launcher = launchers.Get(gameType);
             if (launcher == null) {
                 throw new ArgumentException($"There is no launcher of {gameType} game");
             }
             
-            GameState = GameState.Starting;
-            GameStateChanged?.Invoke();
-
-            //await Task.Delay(1000);
-
             gameContext = launcher.Launch();
             GameState = GameState.InGame;
             GameStateChanged?.Invoke();
-
-            return Task.FromResult(0);
         }
 
-        public Task LeaveGame() {
-            GameState = GameState.Leaving;
-            GameStateChanged?.Invoke();
-            
-            //await Task.Delay(1000);
-            
+        public void LeaveGame() {
             gameContext.Dispose();
 
             GameState = GameState.Menu;
             GameStateChanged?.Invoke();
-            
-            return Task.FromResult(0);
         }
     }
 }

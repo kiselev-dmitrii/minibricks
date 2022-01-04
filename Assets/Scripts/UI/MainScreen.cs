@@ -21,12 +21,12 @@ namespace MiniBricks.UI {
             this.lobbyController = lobbyController;
         }
 
-        public async void OnStartTrainingButtonClick() {
-            await lobbyController.StartGame(GameType.Training);
+        public void OnStartTrainingButtonClick() {
+            lobbyController.StartGame(GameType.Training);
         }
 
-        public async void OnStartBattleButtonClick() {
-            await lobbyController.StartGame(GameType.Battle);
+        public void OnStartBattleButtonClick() {
+            lobbyController.StartGame(GameType.Battle);
         }
     }
 }

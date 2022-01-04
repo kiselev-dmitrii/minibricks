@@ -34,9 +34,9 @@ namespace MiniBricks.UI {
             multiplayerGame.Unpause();
         }
 
-        public async void OnQuitButtonClick() {
+        public void OnQuitButtonClick() {
             Destroy();
-            await lobbyController.LeaveGame();
+            lobbyController.LeaveGame();
         }
         
         public void OnContinueButtonClick() {

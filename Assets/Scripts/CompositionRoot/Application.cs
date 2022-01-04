@@ -1,4 +1,5 @@
 using System;
+using KiselevDmitry.Utils;
 using MiniBricks.Controllers;
 using MiniBricks.Game;
 using MiniBricks.UI;
@@ -9,8 +10,12 @@ namespace MiniBricks.CompositionRoot {
     public class Application : MonoBehaviour {
         [SerializeField]
         private GameDef gameDef;
+
+        private Disposer disposer;
         
         private void Awake() {
+            disposer = new Disposer();
+            
             var windowManager = WindowManager.Create("Settings/UI");
             windowManager.SetCurrent();
             
@@ -26,28 +31,13 @@ namespace MiniBricks.CompositionRoot {
 
             var battleGameLauncher = new BattleGameLauncher(gameDef.MultiplayerGame, pieceFactory, tickProvider, lobbyController);
             lobbyController.AddGameLauncher(battleGameLauncher);
-            
-            var mainScreen = mainScreenFactory.Create();
-            mainScreen.SetActive(true);
 
-            lobbyController.GameStateChanged += () => {
-                switch (lobbyController.GameState) {
-                    case GameState.Menu:
-                        mainScreen.SetActive(true);
-                        break;
-                    case GameState.Starting:
-                        mainScreen.SetActive(false);
-                        break;
-                    case GameState.InGame:
-                        mainScreen.SetActive(false);
-                        break;
-                    case GameState.Leaving:
-                        mainScreen.SetActive(true);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            };
+            var mainScreenWatcher = disposer.Add(new MainScreenWatcher(lobbyController, mainScreenFactory));
+            mainScreenWatcher.Update();
+        }
+
+        private void OnDestroy() {
+            disposer.Dispose();
         }
     }
 }
