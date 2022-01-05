@@ -10,15 +10,11 @@ namespace MiniBricks.Core.Logic {
             tower = (Tower)target;
         }
 
-        public void OnSceneGUI() {
-            DrawMaxHeightLine();
-        }
-
         public override void OnInspectorGUI() {
             DrawDefaultInspector();
             
             if (GUILayout.Button("Add Live")) {
-                tower.AddLives(1);
+                tower.NumLives += 1;
             }
                         
             if (GUILayout.Button("Activate")) {
@@ -28,10 +24,6 @@ namespace MiniBricks.Core.Logic {
             if (GUILayout.Button("Deactivate")) {
                 tower.Deactivate();
             }
-        }
-
-        private void DrawMaxHeightLine() {
-
         }
     }
 }

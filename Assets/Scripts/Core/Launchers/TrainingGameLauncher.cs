@@ -51,8 +51,8 @@ namespace MiniBricks.Core.Launchers {
                 playerCamera = Object.Instantiate(appDef.Camera, game.Transform);
                 playerCamera.SetTarget(player);
                 playerInput = new AnyCommandProvider(new ICommandProvider[] {
-                    game.Transform.gameObject.AddComponent<MouseCommandProvider>().Initialize(player.GetId(), playerCamera),
-                    new KeyboardCommandProvider(player.GetId())
+                    game.Transform.gameObject.AddComponent<MouseCommandProvider>().Initialize(player.Id, playerCamera),
+                    new KeyboardCommandProvider(player.Id)
                 });
                 player.GetComponent<TowerView>().Initialize(game);
 

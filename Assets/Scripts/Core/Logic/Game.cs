@@ -37,6 +37,8 @@ namespace MiniBricks.Core.Logic {
         public event Action TargetHeightChanged;
         public GameSettings Settings { get; }
         
+        public static Game Current { get; private set; }
+        
         public Game(GameSettings settings, ITowerFactory towerFactory) {
             this.towerFactory = towerFactory;
             commands = new List<ICommand>();
@@ -50,6 +52,7 @@ namespace MiniBricks.Core.Logic {
             targetHeight = settings.BaseRequiredHeight;
             
             Settings = settings;
+            Current = this;
         }
 
         public void Dispose() {
@@ -75,6 +78,8 @@ namespace MiniBricks.Core.Logic {
         public Tower GetTower(int towerId) {
             return towers[towerId - 1];
         }
+
+        public IReadOnlyList<Tower> Towers => towers;
 
         /// <summary>
         /// Starts the game
@@ -116,25 +121,29 @@ namespace MiniBricks.Core.Logic {
             return towerResults;
         }
 
-        public int GetTargetHeight() {
-            return targetHeight;
+        public int TargetHeight {
+            get => targetHeight;
+            set {
+                targetHeight = value;
+                TargetHeightChanged?.Invoke();
+            }
         }
 
-        public void SetTargetHeight(int value) {
-            targetHeight = value;
-            TargetHeightChanged?.Invoke();
+        public float Gravity {
+            get => Physics2D.gravity.y;
+            set => Physics2D.gravity = new Vector2(0, value);
         }
-        
+
         private void UpdateTowerStates() {
             for (var i = 0; i < activeTowers.Count; i++) {
                 var tower = activeTowers[i];
-                if (tower.GetNumLives() <= 0) {
+                if (tower.NumLives <= 0) {
                     DeactivateTower(i, GameResult.Defeat);
                     --i;
                     continue;
                 }
 
-                if (tower.GetMaxHeight() >= targetHeight) {
+                if (tower.MaxHeight >= targetHeight) {
                     DeactivateTower(i, GameResult.Victory);
                     --i;
                     continue;

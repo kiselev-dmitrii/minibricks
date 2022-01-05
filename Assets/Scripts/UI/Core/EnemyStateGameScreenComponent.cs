@@ -77,7 +77,7 @@ namespace MiniBricks.UI.Core {
         }
         
         private void OnGameCommandExecuted(ICommand command) {
-            if (command.TowerId != tower.GetId()) {
+            if (command.TowerId != tower.Id) {
                 return;
             }
             
@@ -94,11 +94,11 @@ namespace MiniBricks.UI.Core {
         }
         
         private void OnTowerMaxHeightChanged(Tower _) {
-            Height = Mathf.RoundToInt(tower.GetMaxHeight());
+            Height = Mathf.RoundToInt(tower.MaxHeight);
         }
         
         private void OnTowerNumLivesChanged(Tower _) {
-            NumLives = tower.GetNumLives();
+            NumLives = tower.NumLives;
         }
     }
 }

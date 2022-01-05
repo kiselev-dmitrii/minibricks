@@ -48,11 +48,11 @@ namespace MiniBricks.UI.Core {
         }
         
         private void OnTowerMaxHeightChanged(Tower _) {
-            Height = Mathf.RoundToInt(tower.GetMaxHeight());
+            Height = Mathf.RoundToInt(tower.MaxHeight);
         }
 
         private void OnNumLivesChanged(Tower _) {
-            NumLives = tower.GetNumLives();
+            NumLives = tower.NumLives;
         }
         #endregion
     }

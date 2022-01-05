@@ -38,7 +38,7 @@ namespace MiniBricks.Core.View {
         }
 
         private void OnCommandExecuted(ICommand cmd) {
-            if (cmd.TowerId != tower.GetId()) {
+            if (cmd.TowerId != tower.Id) {
                 return;
             }
             UpdateHighlight();
@@ -73,7 +73,7 @@ namespace MiniBricks.Core.View {
         }
         
         private void UpdateFinishLine() {
-            var targetHeight = game.GetTargetHeight();
+            var targetHeight = game.TargetHeight;
     
             var platformPoint = tower.GetPlatform().GetTopPoint();
             var finishPoint = platformPoint + Vector3.up * targetHeight;

@@ -12,7 +12,7 @@ namespace MiniBricks.Core.Logic {
 
         private static void DrawMaxHeight(Tower tower) {
             var bottom = tower.GetBottomPoint();
-            var maxHeightPoint = bottom + Vector3.up * tower.GetMaxHeight();
+            var maxHeightPoint = bottom + Vector3.up * tower.MaxHeight;
 
             var half = maxHeightLineWidth / 2;
             var start = maxHeightPoint - Vector3.right * half;

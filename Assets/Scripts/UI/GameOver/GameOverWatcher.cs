@@ -33,9 +33,9 @@ namespace MiniBricks.UI.GameOver {
             var towerResults = game.GetTowerResults();
             foreach (var towerResult in towerResults) {
                 var t = towerResult.Tower;
-                var name = $"Tower{t.GetId()}";
+                var name = $"Tower{t.Id}";
                 bool isPlayer = playerTower == t;
-                window.AddUser(name, t.GetNumFalls(), t.GetMaxHeight(), isPlayer);
+                window.AddUser(name, t.NumFalls, t.MaxHeight, isPlayer);
             }
             window.SetActive(true);
         }

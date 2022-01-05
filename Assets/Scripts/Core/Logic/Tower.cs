@@ -18,15 +18,8 @@ namespace MiniBricks.Core.Logic {
         private List<Piece> placedPieces;
         private float maxHeight;
         private int numFalls;
-        private float spawnHeight;
-        private Piece[] spawningPieces;
         private int numLives;
-
-        public event Action<Piece> PieceSpawned; 
-        public event Action<Piece> PieceTouched;
-        public event Action<Piece> PieceFalling;
-        public event Action<Tower> MaxHeightChanged;
-        public event Action<Tower> NumLivesChanged;
+        private Piece[] spawningPieces;
         
         public void Initialize(int towerId, GameSettings settings, IPieceFactory pieceFactory) {
             this.towerId = towerId;
@@ -36,9 +29,9 @@ namespace MiniBricks.Core.Logic {
             currentPiece = null;
             placedPieces = new List<Piece>();
             maxHeight = 0;
-            spawnHeight = settings.SpawnHeight;
+            SpawnHeight = settings.SpawnHeight;
             spawningPieces = settings.PiecePrefabs;
-            numLives = settings.NumLives;
+            NumLives = settings.NumLives;
             
             trigger.Fired += OnFallTriggerFired;
         }
@@ -47,10 +40,29 @@ namespace MiniBricks.Core.Logic {
             trigger.Fired -= OnFallTriggerFired;
         }
 
-        public int GetId() {
-            return towerId;
+        public event Action<Piece> PieceSpawned; 
+        public event Action<Piece> PieceTouched;
+        public event Action<Piece> PieceFalling;
+        
+        public int Id => towerId;
+                
+        public float SpawnHeight { get; set; }
+
+        public event Action<Tower> NumLivesChanged;
+        public int NumLives {
+            get => numLives;
+            set {
+                numLives = value;
+                NumLivesChanged?.Invoke(this);
+            }
         }
         
+        public event Action<Tower> MaxHeightChanged;
+        /// <summary>
+        /// Return maximum height that tower had during gameplay
+        /// </summary>
+        public float MaxHeight => maxHeight;
+
         /// <summary>
         /// Changes platform of tower
         /// </summary>
@@ -106,37 +118,16 @@ namespace MiniBricks.Core.Logic {
         }
 
         /// <summary>
-        /// Returns number of lives
-        /// </summary>
-        public int GetNumLives() {
-            return numLives;
-        }
-
-        public void AddLives(int value) {
-            numLives += value;
-            NumLivesChanged?.Invoke(this);
-        }
-        
-        /// <summary>
         /// Returns number of pieces that fall
         /// </summary>
-        public int GetNumFalls() {
-            return numFalls;
-        }
-
-        /// <summary>
-        /// Return maximum height that tower had during gameplay
-        /// </summary>
-        public float GetMaxHeight() {
-            return maxHeight;
-        }
+        public int NumFalls => numFalls;
 
         /// <summary>
         /// Returns spawn point for pieces
         /// </summary>
         public Vector3 CalculateSpawnPoint() {
             var topPoint = CalculateTopPoint();
-            var spawnPoint = topPoint + spawnHeight * Vector3.up;
+            var spawnPoint = topPoint + SpawnHeight * Vector3.up;
             return spawnPoint;
         }
         
@@ -200,9 +191,8 @@ namespace MiniBricks.Core.Logic {
             piece.Destroy();
 
             numFalls += 1;
-            if (numLives > 0) {
-                numLives -= 1;
-                NumLivesChanged?.Invoke(this);
+            if (NumLives > 0) {
+                NumLives -= 1;
             }
         }
         
