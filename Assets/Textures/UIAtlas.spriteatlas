@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GameAtlas
+  m_Name: UIAtlas
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -22,18 +22,6 @@ SpriteAtlas:
       sRGB: 1
     platformSettings:
     - serializedVersion: 3
-      m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 2048
-      m_ResizeAlgorithm: 0
-      m_TextureFormat: -1
-      m_TextureCompression: 1
-      m_CompressionQuality: 50
-      m_CrunchedCompression: 0
-      m_AllowsAlphaSplitting: 0
-      m_Overridden: 0
-      m_AndroidETC2FallbackOverride: 0
-      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
-    - serializedVersion: 3
       m_BuildTarget: iPhone
       m_MaxTextureSize: 2048
       m_ResizeAlgorithm: 0
@@ -43,6 +31,30 @@ SpriteAtlas:
       m_CrunchedCompression: 0
       m_AllowsAlphaSplitting: 0
       m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 47
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
       m_AndroidETC2FallbackOverride: 0
       m_ForceMaximumCompressionQuality_BC6H_BC7: 0
     packingSettings:
@@ -55,31 +67,29 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: bada6c38147ae4093865c0b062767c67, type: 3}
+    - {fileID: 102900000, guid: 971760afa52154b5b8ba35f2ba575e8d, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 63f845110e5444ef39590ce721f19ceb, type: 3}
-  - {fileID: 21300000, guid: 9f3fa151bbc4046bf9c7fd045893e289, type: 3}
-  - {fileID: 21300000, guid: ebd15443abf7f41c5ab35674558747b3, type: 3}
-  - {fileID: 21300000, guid: 794fe7a8b444c4d0983e32c0d139886a, type: 3}
-  - {fileID: 21300000, guid: efa2c029613864099a53526fc1588e8b, type: 3}
-  - {fileID: 21300000, guid: ffc4f48967e5649a7aca3e468b18e789, type: 3}
-  - {fileID: 21300000, guid: 5698f21ef33a541a3b536a88edd4d5c5, type: 3}
-  - {fileID: 21300000, guid: 4bfd304e6a32545019cd8f9d9512b8cb, type: 3}
-  - {fileID: 21300000, guid: 0746218fdf1cc4b38a3f1efc969043a5, type: 3}
+  - {fileID: 21300000, guid: a755bf204974645a5a8a7eda541e3d55, type: 3}
+  - {fileID: 21300000, guid: 10151731936e54cfe8d341d169fd051f, type: 3}
+  - {fileID: 21300000, guid: b72bc5447a20f46e89cbb2ee34460a60, type: 3}
+  - {fileID: 21300000, guid: b1616f8ab0d8c41ce835eb258804495c, type: 3}
+  - {fileID: 21300000, guid: b09b164b6e6274b79b5c26421f17cdef, type: 3}
+  - {fileID: 21300000, guid: 50d8092c495aa40c6b013fe04f85f338, type: 3}
+  - {fileID: 21300000, guid: e25aa2ee22b9b491dbe7209f6b6f9d32, type: 3}
+  - {fileID: 21300000, guid: 424c95bf4d6464957a5654db42318fe6, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Platform1
-  - Piece5
-  - Piece2
-  - Piece3
-  - Rect
-  - Piece1
-  - FinishLine
-  - Platform2
-  - Piece4
+  - panel
+  - button
+  - panel_decor
+  - Sky
+  - triangle
+  - life
+  - top_right_panel
+  - pause_button
   m_RenderDataMap: {}
-  m_Tag: GameAtlas
+  m_Tag: UIAtlas
   m_IsVariant: 0

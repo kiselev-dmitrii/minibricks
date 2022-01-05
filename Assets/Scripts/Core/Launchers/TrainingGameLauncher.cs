@@ -9,6 +9,7 @@ using MiniBricks.UI;
 using MiniBricks.UI.Core;
 using MiniBricks.UI.GameOver;
 using MiniBricks.Utils;
+using Object = UnityEngine.Object;
 
 namespace MiniBricks.Core.Launchers {
     public class TrainingGameLauncher : IGameLauncher {
@@ -47,7 +48,7 @@ namespace MiniBricks.Core.Launchers {
                 
                 var player = game.CreateTower();
                 player.SetPlatform(appDef.Platforms[0]);
-                playerCamera = GameObjectUtils.Instantiate<CameraView>("Entities/Camera", game.Transform);
+                playerCamera = Object.Instantiate(appDef.Camera, game.Transform);
                 playerCamera.SetTarget(player);
                 playerInput = new AnyCommandProvider(new ICommandProvider[] {
                     game.Transform.gameObject.AddComponent<MouseCommandProvider>().Initialize(player.GetId(), playerCamera),
