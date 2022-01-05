@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace MiniBricks.Utils {
+namespace KiselevDmitry.Utils {
     public static class Container {
         private static readonly Dictionary<Type, object> services;
 

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace MiniBricks.Utils {
+namespace KiselevDmitry.Utils {
     public static class GameObjectUtils {
         public static T Instantiate<T>(String path, Transform parent = null) where T : Object {
             var prefab = Resources.Load<T>(path);
