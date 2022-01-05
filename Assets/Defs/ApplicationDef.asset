@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ApplicationDef
   m_EditorClassIdentifier: 
   GameSettings:
-    SpawnHeight: 14
+    SpawnHeight: 16
     MoveStep: 0.5
     BaseFallSpeed: 4
     AcceleratedFallSpeed: 12

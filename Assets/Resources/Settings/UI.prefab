@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5906240665242110033}
   - component: {fileID: 894420872968013065}
   - component: {fileID: 7250515668930754260}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 5735030577597534475}
   - component: {fileID: 9203376984537627179}
   - component: {fileID: 7021036397334139464}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DebugOverlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,8 +140,8 @@ Canvas:
   m_GameObject: {fileID: 4908736314261545924}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 6334346739426166281}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -150,7 +150,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 999
   m_TargetDisplay: 0
 --- !u!114 &7021036397334139464
 MonoBehaviour:
@@ -304,9 +304,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.05
     width: 1
-    height: 1
+    height: 0.9
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

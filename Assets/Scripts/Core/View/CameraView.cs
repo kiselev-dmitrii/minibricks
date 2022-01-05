@@ -18,9 +18,11 @@ namespace MiniBricks.Core.View {
         private Transform cachedTransform;
         private Tower target;
         private RenderTexture rt;
+        private Rect originalRect;
 
         private void Awake() {
             cachedTransform = transform;
+            originalRect = camera.rect;
         }
         
         public void SetTarget(Tower tower) {
@@ -51,6 +53,7 @@ namespace MiniBricks.Core.View {
         
         public void SetFamebufferOutput() {
             camera.targetTexture = null;
+            camera.rect = originalRect;
             
             if (rt != null) {
                 rt.Release();
@@ -67,6 +70,7 @@ namespace MiniBricks.Core.View {
             rt = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32);
             rt.Create();
             camera.targetTexture = rt;
+            camera.rect = new Rect(0, 0, 1, 1);
         }
 
         public float GetPixelsPerUnit() {
