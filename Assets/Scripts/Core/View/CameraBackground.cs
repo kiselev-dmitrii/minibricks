@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace MiniBricks.Core.View {
-    public class CameraBackgroundAligner : MonoBehaviour {
+    public class CameraBackground : MonoBehaviour {
         [SerializeField]
         private Transform background;
         [SerializeField]
