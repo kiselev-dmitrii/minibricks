@@ -25,7 +25,7 @@ namespace MiniBricks.Core.Logic {
         public event Action<Piece> PieceSpawned; 
         public event Action<Piece> PieceTouched;
         public event Action<Piece> PieceFalling;
-        public event Action<Tower> HeightChanged;
+        public event Action<Tower> MaxHeightChanged;
         public event Action<Tower> NumLivesChanged;
         
         public void Initialize(int towerId, GameSettings settings, IPieceFactory pieceFactory) {
@@ -94,6 +94,10 @@ namespace MiniBricks.Core.Logic {
             return result;
         }
 
+        public Vector3 GetBottomPoint() {
+            return currentPlatform.GetTopPoint();
+        }
+
         /// <summary>
         /// Returns current piece
         /// </summary>
@@ -108,6 +112,11 @@ namespace MiniBricks.Core.Logic {
             return numLives;
         }
 
+        public void AddLives(int value) {
+            numLives += value;
+            NumLivesChanged?.Invoke(this);
+        }
+        
         /// <summary>
         /// Returns number of pieces that fall
         /// </summary>
@@ -118,8 +127,8 @@ namespace MiniBricks.Core.Logic {
         /// <summary>
         /// Return maximum height that tower had during gameplay
         /// </summary>
-        public int GetMaxHeight() {
-            return Mathf.FloorToInt(maxHeight);
+        public float GetMaxHeight() {
+            return maxHeight;
         }
 
         /// <summary>
@@ -193,8 +202,8 @@ namespace MiniBricks.Core.Logic {
             numFalls += 1;
             if (numLives > 0) {
                 numLives -= 1;
+                NumLivesChanged?.Invoke(this);
             }
-            NumLivesChanged?.Invoke(this);
         }
         
         private void UpdateMaxHeight(Piece placedPiece) {
@@ -207,7 +216,7 @@ namespace MiniBricks.Core.Logic {
             var newMaxHeight = heightInWorld - currentPlatform.GetTopPoint().y;
             if (newMaxHeight > maxHeight) {
                 maxHeight = newMaxHeight;
-                HeightChanged?.Invoke(this);
+                MaxHeightChanged?.Invoke(this);
             }
         }
     }

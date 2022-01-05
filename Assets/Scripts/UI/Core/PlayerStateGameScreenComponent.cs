@@ -1,5 +1,6 @@
 using MiniBricks.Core.Logic;
 using NData;
+using UnityEngine;
 
 namespace MiniBricks.UI.Core {
     public class PlayerStateGameScreenComponent : GameScreenComponent {
@@ -29,15 +30,15 @@ namespace MiniBricks.UI.Core {
             this.pauseWindowFactory = pauseWindowFactory;
 
             tower.NumLivesChanged += OnNumLivesChanged;
-            tower.HeightChanged += OnTowerHeightChanged;
+            tower.MaxHeightChanged += OnTowerMaxHeightChanged;
             
-            OnTowerHeightChanged(tower);
+            OnTowerMaxHeightChanged(tower);
             OnNumLivesChanged(tower);
         }
 
         public override void Dispose() {
             tower.NumLivesChanged -= OnNumLivesChanged;
-            tower.HeightChanged -= OnTowerHeightChanged;
+            tower.MaxHeightChanged -= OnTowerMaxHeightChanged;
         }
 
         #region Handlers
@@ -46,8 +47,8 @@ namespace MiniBricks.UI.Core {
             window.SetActive(true);
         }
         
-        private void OnTowerHeightChanged(Tower _) {
-            Height = tower.GetMaxHeight();
+        private void OnTowerMaxHeightChanged(Tower _) {
+            Height = Mathf.RoundToInt(tower.GetMaxHeight());
         }
 
         private void OnNumLivesChanged(Tower _) {

@@ -61,17 +61,17 @@ namespace MiniBricks.UI.Core {
             CameraView = cameraOutput;
             MoveHistory = String.Empty;
             
-            OnTowerHeightChanged(tower);
+            OnTowerMaxHeightChanged(tower);
             OnTowerNumLivesChanged(tower);
             
             game.CommandExecuted += OnGameCommandExecuted;
-            tower.HeightChanged += OnTowerHeightChanged;
+            tower.MaxHeightChanged += OnTowerMaxHeightChanged;
             tower.NumLivesChanged += OnTowerNumLivesChanged;
         }
 
         public override void Dispose() {
             game.CommandExecuted -= OnGameCommandExecuted;
-            tower.HeightChanged -= OnTowerHeightChanged;
+            tower.MaxHeightChanged -= OnTowerMaxHeightChanged;
             tower.NumLivesChanged -= OnTowerNumLivesChanged;
         }
         
@@ -92,8 +92,8 @@ namespace MiniBricks.UI.Core {
             }
         }
         
-        private void OnTowerHeightChanged(Tower _) {
-            Height = tower.GetMaxHeight();
+        private void OnTowerMaxHeightChanged(Tower _) {
+            Height = Mathf.RoundToInt(tower.GetMaxHeight());
         }
         
         private void OnTowerNumLivesChanged(Tower _) {

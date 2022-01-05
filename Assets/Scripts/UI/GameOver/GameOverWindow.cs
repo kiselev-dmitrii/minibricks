@@ -3,6 +3,7 @@ using MiniBricks.Controllers;
 using MiniBricks.Core.Logic;
 using MiniBricks.Utils;
 using NData;
+using UnityEngine;
 
 namespace MiniBricks.UI.GameOver {
     public class GameOverWindowFactory {
@@ -78,8 +79,8 @@ namespace MiniBricks.UI.GameOver {
             IsVictory = result == GameResult.Victory;
         }
 
-        public void AddUser(String name, int falls, int height, bool isPlayer) {
-            Users.Add(new UserItem(name, falls, height, isPlayer));
+        public void AddUser(String name, int falls, float height, bool isPlayer) {
+            Users.Add(new UserItem(name, falls, Mathf.RoundToInt(height), isPlayer));
         }
 
         public void OnContinueButtonClick() {
