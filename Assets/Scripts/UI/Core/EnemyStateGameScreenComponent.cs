@@ -1,16 +1,34 @@
 using System;
 using System.Collections.Generic;
-using KiselevDmitry.Utils;
 using MiniBricks.Core.Logic;
 using MiniBricks.Core.Logic.Commands;
 using MiniBricks.Core.Logic.Interfaces;
-using MiniBricks.Utils;
 using NData;
 using UnityEngine;
 
 namespace MiniBricks.UI.Core {
+    public enum ActionType {
+        Right = 0,
+        Left = 1,
+        Rotate = 2
+    }
+    
+    public class ActionItem : Context {
+        #region Property Type
+        public Property<int> TypeProperty { get; } = new Property<int>();
+        public ActionType Type {
+            get => (ActionType)TypeProperty.GetValue();
+            set => TypeProperty.SetValue((int)value);
+        }
+        #endregion
+
+        public ActionItem(ActionType type) {
+            Type = type;
+        }
+    }
+    
     public class EnemyStateGameScreenComponent : GameScreenComponent {
-        public override string Path => "UI/GameScreen/EnemyStateGameScreenComponent";        
+        public override string Path => "UI/GameScreen/EnemyStateGameScreenComponent/EnemyStateGameScreenComponent";        
         
         #region Property Height
         public Property<int> HeightProperty { get; } = new Property<int>();
@@ -36,31 +54,25 @@ namespace MiniBricks.UI.Core {
         }
         #endregion
 
-        #region Property MoveHistory
-        public Property<String> MoveHistoryProperty { get; } = new Property<String>();
-        public String MoveHistory {
-            get => MoveHistoryProperty.GetValue();
-            set => MoveHistoryProperty.SetValue(value);
-        }
+        #region Collection MoveHistory
+        public Collection<ActionItem> MoveHistory { get; } = new Collection<ActionItem>(false);
         #endregion
         
-        private readonly MiniBricks.Core.Logic.Game game;
+        private readonly Game game;
         private readonly Tower tower;
-        private const int maxMoveHistoryLength = 6;
+        private const int maxMoveHistoryLength = 4;
 
-        private static readonly Dictionary<Type, String> commandRepresentations = new Dictionary<Type, String>() {
-            { typeof(LeftCommand), "→" },
-            { typeof(RightCommand), "←" },
-            { typeof(RotateCommand), "↻" },
-            { typeof(StartAccelerateCommand), "↓"}
+        private static readonly Dictionary<Type, ActionType> actionTypes = new Dictionary<Type, ActionType>() {
+            { typeof(LeftCommand), ActionType.Left },
+            { typeof(RightCommand), ActionType.Right },
+            { typeof(RotateCommand), ActionType.Rotate },
         };
 
-        public EnemyStateGameScreenComponent(MiniBricks.Core.Logic.Game game, Tower tower, RenderTexture cameraOutput) {
+        public EnemyStateGameScreenComponent(Game game, Tower tower, RenderTexture cameraOutput) {
             this.game = game;
             this.tower = tower;
         
             CameraView = cameraOutput;
-            MoveHistory = String.Empty;
             
             OnTowerMaxHeightChanged(tower);
             OnTowerNumLivesChanged(tower);
@@ -80,16 +92,14 @@ namespace MiniBricks.UI.Core {
             if (command.TowerId != tower.Id) {
                 return;
             }
-            
-            var representation = commandRepresentations.Get(command.GetType());
-            if (representation == null) {
+
+            if (!actionTypes.TryGetValue(command.GetType(), out var actionType)) {
                 return;
             }
-
-            MoveHistory = MoveHistory.Insert(0, representation);
-            int moveHistoryLength = MoveHistory.Length;
-            if (moveHistoryLength > maxMoveHistoryLength) {
-                MoveHistory = MoveHistory.Remove(moveHistoryLength-1, 1);
+            
+            MoveHistory.Add(new ActionItem(actionType));
+            if (MoveHistory.Count > maxMoveHistoryLength) {
+                MoveHistory.Remove(0);
             }
         }
         

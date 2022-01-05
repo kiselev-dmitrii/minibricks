@@ -76,6 +76,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a755bf204974645a5a8a7eda541e3d55, type: 3}
   - {fileID: 21300000, guid: 10151731936e54cfe8d341d169fd051f, type: 3}
   - {fileID: 21300000, guid: b72bc5447a20f46e89cbb2ee34460a60, type: 3}
+  - {fileID: 21300000, guid: 24a02d6694e6f4cff8e09af14364c823, type: 3}
+  - {fileID: 21300000, guid: 53e72de7b93224ae692419daf8725c1e, type: 3}
   - {fileID: 21300000, guid: b1616f8ab0d8c41ce835eb258804495c, type: 3}
   - {fileID: 21300000, guid: b09b164b6e6274b79b5c26421f17cdef, type: 3}
   - {fileID: 21300000, guid: 50d8092c495aa40c6b013fe04f85f338, type: 3}
@@ -85,6 +87,8 @@ SpriteAtlas:
   - panel
   - button
   - panel_decor
+  - arrow
+  - rotate_arrow
   - Sky
   - triangle
   - life

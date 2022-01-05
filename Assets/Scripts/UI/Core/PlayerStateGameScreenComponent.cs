@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MiniBricks.UI.Core {
     public class PlayerStateGameScreenComponent : GameScreenComponent {
-        public override string Path => "UI/GameScreen/PlayerStateGameScreenComponent";
+        public override string Path => "UI/GameScreen/PlayerStateGameScreenComponent/PlayerStateGameScreenComponent";
         
         #region Property NumLives
         public Property<int> NumLivesProperty { get; } = new Property<int>();
