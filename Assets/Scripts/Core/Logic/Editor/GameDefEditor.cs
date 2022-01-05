@@ -26,7 +26,7 @@ namespace MiniBricks.Core.Logic {
         private void DrawGame(Game game) {
             EditorGUILayout.BeginVertical("Box");
             game.TargetHeight = Mathf.Clamp(EditorGUILayout.IntField("Required Height", game.TargetHeight), 10, 100);
-            game.Gravity = EditorGUILayout.Slider("Required Height", game.Gravity, -10, 10);
+            game.Gravity = EditorGUILayout.Slider("Gravity", game.Gravity, -20, 0);
             EditorGUILayout.EndVertical();
             
             EditorGUILayout.BeginHorizontal();
@@ -37,12 +37,19 @@ namespace MiniBricks.Core.Logic {
         }
 
         private void DrawTower(Tower tower) {
+            var originalColor = GUI.color;
+            if (tower.IsActive()) {
+                GUI.color = Color.green;
+            }
+            
             EditorGUILayout.BeginVertical("Box");
             EditorGUILayout.LabelField($"Tower {tower.Id}");
             EditorGUILayout.FloatField("Reached height", tower.MaxHeight);
             tower.NumLives = Mathf.Clamp(EditorGUILayout.IntField("Num Lives", tower.NumLives), 0, 10);
             tower.SpawnHeight = EditorGUILayout.Slider("Spawn Height", tower.SpawnHeight, 0, 20);
             EditorGUILayout.EndVertical();
+
+            GUI.color = originalColor;
         }
     }
 }

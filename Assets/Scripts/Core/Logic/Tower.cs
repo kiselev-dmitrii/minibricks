@@ -147,6 +147,10 @@ namespace MiniBricks.Core.Logic {
         public void Deactivate() {
             isActive = false;
         }
+
+        public bool IsActive() {
+            return isActive;
+        }
         
         private void SpawnPiece() {
             int i = Random.Range(0, spawningPieces.Length);
