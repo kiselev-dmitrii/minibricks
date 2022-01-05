@@ -172,5 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93be526e809243e3910268a930a1cf64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.4
-  intensity: 0.4
+  piece: {fileID: 404859634338989812}
+  spriteRenderer: {fileID: 404859634338989817}
+  effectDuration: 0.5
+  effectIntensity: 0.5
