@@ -1,7 +1,6 @@
 using MiniBricks.Controllers;
 using MiniBricks.Core.Logic;
 using MiniBricks.Utils;
-using MiniBricks.Core.Logic;
 
 namespace MiniBricks.UI {
     public class PauseWindowFactory {
