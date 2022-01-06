@@ -7,10 +7,11 @@
       "dependencies": {}
     },
     "com.demigiant.dotween": {
-      "version": "file:com.demigiant.dotween",
+      "version": "1.2.632",
       "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
     },
     "com.kiselevdmitry.ndata.bindings": {
       "version": "file:com.kiselevdmitry.ndata.bindings",

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.demigiant.dotween": "1.2.632",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "1.15.4",
     "com.unity.device-simulator": "3.0.3-preview",
@@ -41,5 +42,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.demigiant.dotween"
+      ]
+    }
+  ]
 }
